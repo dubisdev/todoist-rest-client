@@ -1,0 +1,21 @@
+{
+  "name": "todoist-rest-client",
+  "version": "0.0.1",
+  "description": "A simple todoist-rest-api client",
+  "main": "index.js",
+  "type": "module",
+  "keywords": ["todoist", "rest-client"],
+  "author": "Dubisdev",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "0.21.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dubisdev/todoist-rest-client.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dubisdev/todoist-rest-client/issues"
+  },
+  "homepage": "https://github.com/dubisdev/npm-todoist-rest-api#readme"
+}
