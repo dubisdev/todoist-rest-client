@@ -1,6 +1,6 @@
 {
   "name": "todoist-rest-client",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A simple todoist-rest-api client",
   "main": "index.js",
   "type": "module",
@@ -17,5 +17,5 @@
   "bugs": {
     "url": "https://github.com/dubisdev/todoist-rest-client/issues"
   },
-  "homepage": "https://github.com/dubisdev/npm-todoist-rest-api#readme"
+  "homepage": "https://github.com/dubisdev/todoist-rest-client#readme"
 }
