@@ -1,5 +1,4 @@
-# TODOIST-REST-CLIENT
-## v.0.0.3
+# TODOIST-REST-CLIENT v.0.0.3
 
 ## Working on
 
