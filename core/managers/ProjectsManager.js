@@ -24,6 +24,13 @@ export default class ProjectsManager {
 		});
 		return arrayProjects;
 	}
+
+	/**
+	 * returns an array with all projects JSON info
+	 */
+	async getAllJSON() {
+		return await getAllJson(this.headers);
+	}
 }
 
 async function getAllJson(headers) {

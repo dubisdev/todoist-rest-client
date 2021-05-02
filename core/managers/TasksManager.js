@@ -25,6 +25,13 @@ export default class TasksManager {
 	}
 
 	/**
+	 * returns an array with all tasks JSON info
+	 */
+	async getAllJSON() {
+		return await getAllJson(this.headers);
+	}
+
+	/**
 	 * returns an array with all today tasks
 	 */
 	async getToday() {

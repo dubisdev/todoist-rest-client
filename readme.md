@@ -3,8 +3,9 @@
 ## Working on
 
 - New resources: Projects & Sections !!
-- New general functions: 
+- New general functions:
   - Find by ID
+  - Get JSONs => implementing methods for getting JSON (not content/name arrays)
 
 ## License
 
