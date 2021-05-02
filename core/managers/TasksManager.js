@@ -1,4 +1,4 @@
-import Task from "../todoist_resources/Task.js";
+import Task from "../resources/Task.js";
 import axios from "axios";
 
 export default class TasksManager {

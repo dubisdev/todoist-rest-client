@@ -1,4 +1,4 @@
-import IManager from "./IManager.js";
+import IManager from "./managers/IManager.js";
 
 export default class TDSClient {
 	constructor(apiToken) {
