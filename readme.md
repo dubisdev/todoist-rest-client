@@ -11,7 +11,7 @@
 
 ```js
 import TDSClient, { Project } from "todoist-rest-client";
-const myClient = new TDSClient(apiToken);
+const myClient = new TDSClient(API_TOKEN);
 myClient.create({ type: "project" }, new Project({ name: "New Project" }));
 ```
 
