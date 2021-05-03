@@ -1,6 +1,6 @@
 {
   "name": "todoist-rest-client",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A simple todoist-rest-api client",
   "main": "index.js",
   "type": "module",
