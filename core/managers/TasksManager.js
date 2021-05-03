@@ -7,9 +7,13 @@ export default class TasksManager {
 	}
 
 	create(task = new Task()) {
-		axios
+		return axios
 			.post(`https://api.todoist.com/rest/v1/tasks`, task, this.headers)
-			.then(() => true);
+			.then(() => true)
+			.catch((err) => {
+				console.log(err);
+				return false;
+			});
 	}
 
 	/**

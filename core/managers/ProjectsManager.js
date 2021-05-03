@@ -7,10 +7,13 @@ export default class ProjectsManager {
 	}
 
 	create(project = new Project()) {
-		axios
+		return axios
 			.post(`https://api.todoist.com/rest/v1/projects`, project, this.headers)
 			.then(() => true)
-			.catch((err) => console.error(err));
+			.catch((err) => {
+				console.log(err);
+				return false;
+			});
 	}
 
 	/**
