@@ -24,7 +24,8 @@ A todoist rest API client with:
 ## Implemented Features
 
 - get Today Tasks
-- get All Tasks/Projects
+- get All Tasks/Projects Names
+- get All Tasks/Projects JSON
 - create task/project (see examples)
 
 I'll implement more features in the future like:
