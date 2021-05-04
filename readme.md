@@ -52,7 +52,7 @@ const Client = new TDSClient(API_TOKEN); //get an api token from your todoist in
 
 ## API
 
-### Client.getAll({type: string})
+### Client.getAll( { type: string } )
 
 This method returns an array of Titles/Names (strings) of all objects from the type .
 
@@ -68,7 +68,7 @@ Client.getAll({ type: "task" }); // ["task 1", "task 2", ...]
 Client.getAll({ type: "project" }); // ["Project 1", "Project 2", ...]
 ```
 
-### Client.create({type: string}, todoistResource)
+### Client.create( { type: string } , todoistResource)
 
 This method allows creating todoist resources (tasks, projects, ...).
 
