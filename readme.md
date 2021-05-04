@@ -68,6 +68,22 @@ Client.getAll({ type: "task" }); // ["task 1", "task 2", ...]
 Client.getAll({ type: "project" }); // ["Project 1", "Project 2", ...]
 ```
 
+### Client.getAllJSON( { type: string } )
+
+This method returns an array of Titles/Names (JSON) of all objects from the type. The JSON has all the tasks/projects info.
+
+- If no param -> returns all tasks JSON.
+
+```js
+import TDSClient from "todoist-rest-client";
+
+const Client = new TDSClient(API_TOKEN); //get an api token from your todoist integrations page
+
+Client.getAllJSON(); // [{taskObject}, {taskObject}, {taskObject}, ...]
+Client.getAllJSON({ type: "task" }); // [{taskObject}, {taskObject}, {taskObject}, ...]
+Client.getAllJSON({ type: "project" }); // [{projectObject}, {projectObject}, {projectObject}]
+```
+
 ### Client.create( { type: string } , todoistResource)
 
 This method allows creating todoist resources (tasks, projects, ...).
