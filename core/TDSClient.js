@@ -1,4 +1,4 @@
-import IManager from "./IManager.js";
+import IManager from "./managers/IManager.js";
 
 export default class TDSClient {
 	constructor(apiToken) {
@@ -19,6 +19,15 @@ export default class TDSClient {
 	}
 
 	/**
+	 * Method for getting all todoist resources from one type (task, project, etc.) in an array with JSON content
+	 * The resource type is given by params
+	 */
+	async getAllJSON({ type = "task" } = {}) {
+		const TypeManager = new IManager(type, this.headers);
+		return await TypeManager.getAllJSON();
+	}
+
+	/**
 	 * Method for getting today tasks
 	 */
 	async getTodayTasks() {
@@ -29,9 +38,10 @@ export default class TDSClient {
 	/**
 	 * Method for creating todoist resources (task, project, etc.). The resource type ond object are given by params.
 	 * If no params, creates a NO_CONTENT task
+	 * Returns true if all ok, then false.
 	 */
 	create({ type = "task" } = {}, ObjectFromType) {
 		const TypeManager = new IManager(type, this.headers);
-		TypeManager.create(ObjectFromType);
+		return TypeManager.create(ObjectFromType);
 	}
 }

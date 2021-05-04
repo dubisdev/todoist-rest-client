@@ -1,5 +1,4 @@
-import TDSClient from "./api_services/tds_client.js";
-import Task from "./todoist_resources/Task.js";
-
+import TDSClient from "./core/TDSClient.js";
 export default TDSClient;
-export { Task };
+
+export { Task, Project } from "./core/resources/index.js";

@@ -1,4 +1,4 @@
-import Task from "../todoist_resources/Task.js";
+import Task from "../resources/Task.js";
 import axios from "axios";
 
 export default class TasksManager {
@@ -7,9 +7,13 @@ export default class TasksManager {
 	}
 
 	create(task = new Task()) {
-		axios
+		return axios
 			.post(`https://api.todoist.com/rest/v1/tasks`, task, this.headers)
-			.then(() => true);
+			.then(() => true)
+			.catch((err) => {
+				console.log(err);
+				return false;
+			});
 	}
 
 	/**
@@ -22,6 +26,13 @@ export default class TasksManager {
 			arrayTasks.push(task.content);
 		});
 		return arrayTasks;
+	}
+
+	/**
+	 * returns an array with all tasks JSON info
+	 */
+	async getAllJSON() {
+		return await getAllJson(this.headers);
 	}
 
 	/**
