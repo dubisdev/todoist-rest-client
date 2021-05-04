@@ -1,20 +1,3 @@
-# TODOIST-REST-CLIENT v.0.0.3
-
-## _A simple todoist-rest-api client_
-
-## Important changes
-
-- Now `create` function returns a boolean: true if the resource was created successfully and false if not.
-- New general functions:
-  - Get JSONs => implemented methods for getting JSON (not content/name arrays)
-- Now you can create projects!
-
-```js
-import TDSClient, { Project } from "todoist-rest-client";
-const myClient = new TDSClient(API_TOKEN);
-myClient.create({ type: "project" }, new Project({ name: "New Project" }));
-```
-
 # TODOIST-REST-CLIENT
 
 ## _A simple todoist-rest-api client_
