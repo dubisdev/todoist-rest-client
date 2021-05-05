@@ -38,10 +38,11 @@ export default class TDSClient {
 	/**
 	 * Method for creating todoist resources (task, project, etc.). The resource type ond object are given by params.
 	 * If no params, creates a NO_CONTENT task
+	 * Returns true if all ok, then false.
 	 */
 	create({ type = "task" } = {}, ObjectFromType) {
 		const TypeManager = new IManager(type, this.headers);
-		TypeManager.create(ObjectFromType);
+		return TypeManager.create(ObjectFromType);
 	}
 
 	/**

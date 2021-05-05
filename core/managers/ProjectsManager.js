@@ -40,6 +40,7 @@ export default class ProjectsManager {
 		let project = await getOneJSON(id, this.headers);
 		return project;
 	}
+
 }
 
 async function getAllJSON(headers) {
