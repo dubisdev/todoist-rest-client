@@ -7,18 +7,11 @@ export default class ProjectsManager {
 	}
 
 	create(project = new Project()) {
-		axios
-			.post(`https://api.todoist.com/rest/v1/projects`, project, this.headers)
-			.then(() => true)
-			.catch((err) => console.error(err));
-	}
-
-	/**
-	 * returns the json of a project
-	 */
-	async get(id) {
-		let project = await getOneJSON(id, this.headers);
-		return project;
+		axios.post(
+			`https://api.todoist.com/rest/v1/projects`,
+			project,
+			this.headers
+		);
 	}
 
 	/**
@@ -31,6 +24,21 @@ export default class ProjectsManager {
 			arrayProjects.push(project.name);
 		});
 		return arrayProjects;
+	}
+
+	/**
+	 * returns an array with all projects JSON info
+	 */
+	async getAllJSON() {
+		return await getAllJson(this.headers);
+	}
+
+	/**
+	 * returns the json of a project
+	 */
+	async get(id) {
+		let project = await getOneJSON(id, this.headers);
+		return project;
 	}
 }
 

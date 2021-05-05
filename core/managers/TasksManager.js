@@ -7,24 +7,7 @@ export default class TasksManager {
 	}
 
 	create(task = new Task()) {
-		axios
-			.post(`https://api.todoist.com/rest/v1/tasks`, task, this.headers)
-			.then(() => true);
-	}
-
-	/**
-	 * returns a JSON with a task
-	 */
-	async get(id) {
-		let task = await getOneJSON(id, this.headers);
-		return task;
-	}
-	/**
-	 * returns an array with all today tasks
-	 */
-	async getAllJSON() {
-		let json = await getAllJSON(this.headers);
-		return json;
+		axios.post(`https://api.todoist.com/rest/v1/tasks`, task, this.headers);
 	}
 
 	/**
@@ -37,6 +20,13 @@ export default class TasksManager {
 			arrayTasks.push(task.content);
 		});
 		return arrayTasks;
+	}
+
+	/**
+	 * returns an array with all today tasks
+	 */
+	async getAllJSON() {
+		return await getAllJSON(this.headers);
 	}
 
 	/**
@@ -72,6 +62,13 @@ export default class TasksManager {
 			);
 
 		return todayTasksJson;
+	}
+
+	/**
+	 * returns a JSON with a task
+	 */
+	async get(id) {
+		return await getOneJSON(id, this.headers);
 	}
 
 	/**
