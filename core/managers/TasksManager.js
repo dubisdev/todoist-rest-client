@@ -13,10 +13,25 @@ export default class TasksManager {
 	}
 
 	/**
+	 * returns a JSON with a task
+	 */
+	async get(id) {
+		let task = await getOneJSON(id, this.headers);
+		return task;
+	}
+	/**
+	 * returns an array with all today tasks
+	 */
+	async getAllJSON() {
+		let json = await getAllJSON(this.headers);
+		return json;
+	}
+
+	/**
 	 * returns an array with all today tasks
 	 */
 	async getAll() {
-		let json = await getAllJson(this.headers);
+		let json = await getAllJSON(this.headers);
 		let arrayTasks = [];
 		json.map((task) => {
 			arrayTasks.push(task.content);
@@ -28,7 +43,7 @@ export default class TasksManager {
 	 * returns an array with all today tasks
 	 */
 	async getToday() {
-		let json = await getAllJson(this.headers);
+		let json = await getAllJSON(this.headers);
 		let arrayTasks = [];
 
 		let todayTasksJson = json
@@ -43,10 +58,27 @@ export default class TasksManager {
 
 		return arrayTasks;
 	}
+
+	/**
+	 * complete a task
+	 */
+	async completeTask(id) {
+		return await axios.post(
+			`https://api.todoist.com/rest/v1/tasks/${id}/close`,
+			{},
+			this.headers
+		);
+	}
 }
 
-async function getAllJson(headers) {
+async function getAllJSON(headers) {
 	return await axios
 		.get(`https://api.todoist.com/rest/v1/tasks`, headers)
+		.then((res = {}) => res.data);
+}
+
+async function getOneJSON(id, headers) {
+	return await axios
+		.get(`https://api.todoist.com/rest/v1/tasks/${id}`, headers)
 		.then((res = {}) => res.data);
 }

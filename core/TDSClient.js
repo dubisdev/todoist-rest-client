@@ -10,6 +10,23 @@ export default class TDSClient {
 	}
 
 	/**
+	 * Method for getting today tasks
+	 */
+	async getTodayTasks() {
+		const TypeManager = new IManager("task", this.headers);
+		return await TypeManager.getToday();
+	}
+
+	/**
+	 * Method for getting a todoist resource from one type (task, project, etc.) by id.
+	 * The resource type is given by params.
+	 */
+	async get({ type, id } = {}) {
+		const TypeManager = new IManager(type, this.headers);
+		return await TypeManager.get(id);
+	}
+
+	/**
 	 * Method for getting all todoist resources from one type (task, project, etc.).
 	 * The resource type is given by params
 	 */
@@ -19,11 +36,12 @@ export default class TDSClient {
 	}
 
 	/**
-	 * Method for getting today tasks
+	 * Method for getting all todoist resources jsons from one type (task, project, etc.).
+	 * The resource type is given by params
 	 */
-	async getTodayTasks() {
-		const TypeManager = new IManager("task", this.headers);
-		return await TypeManager.getToday();
+	async getAllJSON({ type = "task" } = {}) {
+		const TypeManager = new IManager(type, this.headers);
+		return await TypeManager.getAllJSON();
 	}
 
 	/**
@@ -33,5 +51,18 @@ export default class TDSClient {
 	create({ type = "task" } = {}, ObjectFromType) {
 		const TypeManager = new IManager(type, this.headers);
 		TypeManager.create(ObjectFromType);
+	}
+
+	/**
+	 * Method for creating todoist resources (task, project, etc.). The resource type ond object are given by params.
+	 * If no params, creates a NO_CONTENT task
+	 */
+	async completeTask({ TaskObject = {}, id }) {
+		const TypeManager = new IManager("task", this.headers);
+		if (TaskObject.id) {
+			return await TypeManager.completeTask(TaskObject.id);
+		} else {
+			return await TypeManager.completeTask(id);
+		}
 	}
 }

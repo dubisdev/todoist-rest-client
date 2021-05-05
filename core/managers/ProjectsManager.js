@@ -14,10 +14,18 @@ export default class ProjectsManager {
 	}
 
 	/**
+	 * returns the json of a project
+	 */
+	async get(id) {
+		let project = await getOneJSON(id, this.headers);
+		return project;
+	}
+
+	/**
 	 * returns an array with all projects
 	 */
 	async getAll() {
-		let json = await getAllJson(this.headers);
+		let json = await getAllJSON(this.headers);
 		let arrayProjects = [];
 		json.map((project) => {
 			arrayProjects.push(project.name);
@@ -26,8 +34,14 @@ export default class ProjectsManager {
 	}
 }
 
-async function getAllJson(headers) {
+async function getAllJSON(headers) {
 	return await axios
 		.get(`https://api.todoist.com/rest/v1/projects`, headers)
+		.then((res = {}) => res.data);
+}
+
+async function getOneJSON(id, headers) {
+	return await axios
+		.get(`https://api.todoist.com/rest/v1/projects/${id}`, headers)
 		.then((res = {}) => res.data);
 }
