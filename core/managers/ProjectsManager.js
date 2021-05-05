@@ -6,8 +6,8 @@ export default class ProjectsManager {
 		this.headers = headers;
 	}
 
-	create(project = new Project()) {
-		axios.post(
+	async create(project = new Project()) {
+		return await axios.post(
 			`https://api.todoist.com/rest/v1/projects`,
 			project,
 			this.headers
@@ -40,7 +40,6 @@ export default class ProjectsManager {
 		let project = await getOneJSON(id, this.headers);
 		return project;
 	}
-
 }
 
 async function getAllJSON(headers) {

@@ -40,9 +40,9 @@ export default class TDSClient {
 	 * If no params, creates a NO_CONTENT task
 	 * Returns true if all ok, then false.
 	 */
-	create({ type = "task" } = {}, ObjectFromType) {
+	async create({ type = "task" } = {}, ObjectFromType) {
 		const TypeManager = new IManager(type, this.headers);
-		return TypeManager.create(ObjectFromType);
+		return await TypeManager.create(ObjectFromType);
 	}
 
 	/**

@@ -6,8 +6,12 @@ export default class TasksManager {
 		this.headers = headers;
 	}
 
-	create(task = new Task()) {
-		axios.post(`https://api.todoist.com/rest/v1/tasks`, task, this.headers);
+	async create(task = new Task()) {
+		return await axios.post(
+			`https://api.todoist.com/rest/v1/tasks`,
+			task,
+			this.headers
+		);
 	}
 
 	/**
