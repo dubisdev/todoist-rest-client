@@ -1,3 +1,21 @@
+# TODOIST-REST-CLIENT v.0.0.4
+
+## _A simple todoist-rest-api client_
+
+## Important changes
+
+- Now `create` function returns a promise (from axios). (No more changes here)
+- New general functions:
+  - Get today JSONs => implemented method for getting today tasks JSON (not content/name arrays)
+- Now you can complete tasks!
+
+```js
+import TDSClient from "todoist-rest-client";
+const myClient = new TDSClient(API_TOKEN);
+myClient.completeTask({id: ...}); //with the id
+myClient.completeTask({TaskObject: {TaskObject with id prop} }); //with a TaskObject
+```
+
 # TODOIST-REST-CLIENT
 
 ## _A simple todoist-rest-api client_
