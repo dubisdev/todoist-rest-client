@@ -6,9 +6,10 @@ A todoist rest API client with:
 
 ## Implemented Features
 
-- get Today Tasks
-- get All Tasks
+- get Today Tasks (names and JSON)
+- get All Tasks (names and JSON)
 - create task (see example)
+- complete task (see example)
 
 I'd implement more features in the future like:
 

@@ -10,11 +10,18 @@ export default class TDSClient {
 	}
 
 	/**
-	 * Method for getting today tasks
+	 * Method for getting today tasks names
 	 */
 	async getTodayTasks() {
 		const TypeManager = new IManager("task", this.headers);
 		return await TypeManager.getToday();
+	}
+	/**
+	 * Method for getting today tasks json
+	 */
+	async getTodayTasksJSON() {
+		const TypeManager = new IManager("task", this.headers);
+		return await TypeManager.getTodayJSON();
 	}
 
 	/**

@@ -60,6 +60,21 @@ export default class TasksManager {
 	}
 
 	/**
+	 * returns an array with all today tasks
+	 */
+	async getTodayJSON() {
+		let json = await getAllJSON(this.headers);
+
+		let todayTasksJson = json
+			.filter((task) => task.due !== undefined)
+			.filter(
+				(task) => task.due.date === new Date().toISOString().substring(0, 10)
+			);
+
+		return todayTasksJson;
+	}
+
+	/**
 	 * complete a task
 	 */
 	async completeTask(id) {
