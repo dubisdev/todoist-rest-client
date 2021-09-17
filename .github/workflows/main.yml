@@ -1,4 +1,4 @@
-name: NPM Autopublish
+name: NPM Publish and GITHUB Release
 
 on:
   push:
@@ -19,3 +19,13 @@ jobs:
         uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPM_TOKEN }}
+
+      - if: ${{ steps.publish.outputs.type != 'none' }}
+        name: "Create GH Release"
+        uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: false
+          title: todoist-rest-client v.${{ steps.publish.outputs.version }}
+          automatic_release_tag: ${{ steps.publish.outputs.version }}
+
