@@ -51,7 +51,7 @@ Client.task.getAll(); // ["task 1", "task 2", ...]
 Client.project.getAll(); // ["Project 1", "Project 2", ...]
 ```
 
-### Client.resouce_type.getAllJSON()
+### Client.resource_type.getAllJSON()
 
 This method returns an array of Titles/Names (JSON) of all objects from the type. The JSON has all the tasks/projects info.
 
@@ -64,7 +64,7 @@ Client.task.getAllJSON(); // [{taskObject}, {taskObject}, {taskObject}, ...]
 Client.project.getAllJSON(); // [{projectObject}, {projectObject}, {projectObject}]
 ```
 
-### Client.create( { type: string } , todoistResource)
+### Client.resource_type.create( todoistResource )
 
 This method allows creating todoist resources (tasks, projects, ...).
 
