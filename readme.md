@@ -33,60 +33,53 @@ npm install todoist-rest-client
 ```js
 import TDSClient from "todoist-rest-client";
 
-const Client = new TDSClient(API_TOKEN); //get an api token from your todoist integrations page
+const myClient = TDSClient(API_TOKEN); //get an api token from your todoist integrations page
 ```
 
 ## API
 
-### Client.getAll( { type: string } )
+### Client.resource_type.getAll()
 
-This method returns an array of Titles/Names (strings) of all objects from the type .
-
-- If no param -> returns all tasks.
+This method returns an array of Titles/Names (strings) of all objects from the resource type.
 
 ```js
 import TDSClient from "todoist-rest-client";
 
-const Client = new TDSClient(API_TOKEN); //get an api token from your todoist integrations page
+const Client = TDSClient(API_TOKEN); //get an api token from your todoist integrations page
 
-Client.getAll(); // ["task 1", "task 2", ...]
-Client.getAll({ type: "task" }); // ["task 1", "task 2", ...]
-Client.getAll({ type: "project" }); // ["Project 1", "Project 2", ...]
+Client.task.getAll(); // ["task 1", "task 2", ...]
+Client.project.getAll(); // ["Project 1", "Project 2", ...]
 ```
 
-### Client.getAllJSON( { type: string } )
+### Client.resouce_type.getAllJSON()
 
 This method returns an array of Titles/Names (JSON) of all objects from the type. The JSON has all the tasks/projects info.
 
-- If no param -> returns all tasks JSON.
-
 ```js
 import TDSClient from "todoist-rest-client";
 
-const Client = new TDSClient(API_TOKEN); //get an api token from your todoist integrations page
+const Client = TDSClient(API_TOKEN); //get an api token from your todoist integrations page
 
-Client.getAllJSON(); // [{taskObject}, {taskObject}, {taskObject}, ...]
-Client.getAllJSON({ type: "task" }); // [{taskObject}, {taskObject}, {taskObject}, ...]
-Client.getAllJSON({ type: "project" }); // [{projectObject}, {projectObject}, {projectObject}]
+Client.task.getAllJSON(); // [{taskObject}, {taskObject}, {taskObject}, ...]
+Client.project.getAllJSON(); // [{projectObject}, {projectObject}, {projectObject}]
 ```
 
 ### Client.create( { type: string } , todoistResource)
 
 This method allows creating todoist resources (tasks, projects, ...).
 
-- If no params are given -> creates a _No_Content_ task in the `Inbox`.
-- If only given type param -> creates default todoistResourceType.
+- If no params are given -> creates default todoistResourceType.
 
 ```js
 //Creating a todoist resource
 import TDSClient from "todoist-rest-client";
 
-const Client = new TDSClient(API_TOKEN); //get an api token from your todoist integrations page
+const Client = TDSClient(API_TOKEN); //get an api token from your todoist integrations page
 
-Client.create(); // creates a _NO_CONTENT_ task in the inbox
-Client.create({ type: "task" }); // creates a _NO_CONTENT_ task in the inbox
-Client.create({ type: "project" }); // creates a _NO_NAME_ project
-Client.create({ type: "project" }, projectObject); // creates a project with the data given in the object
+Client.task.create(); // creates a _NO_CONTENT_ task in the inbox
+Client.task.create(taskObject); // creates a task with the data given in the object
+Client.project.create(); // creates a _NO_NAME_ project
+Client.project.create(projectObject); // creates a project with the data given in the object
 ```
 
 See [resources](#Todoist-Resources)
@@ -109,10 +102,10 @@ const myTask = new Task({....});
 const myProject = new Project({....});
 
 //Then use them to create the resource in the server...
-const myClient = new TDSCLient(API_TOKEN);
+const myClient = TDSCLient(API_TOKEN);
 
-myClient.create({type: "project"}, myProject);
-myClient.create({type: "task"}, myTask);
+myClient.project.create(myProject);
+myClient.task.create(myTask);
 
 ```
 
