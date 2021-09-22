@@ -1,4 +1,4 @@
-# TODOIST-REST-CLIENT
+# JS TODOIST-REST-CLIENT
 
 ## _A simple todoist-rest-api client_
 
