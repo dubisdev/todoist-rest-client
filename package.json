@@ -3,7 +3,7 @@
     "build": "cd repo && yarn && yarn build",
     "copy": "Xcopy repo\\build docs\\ /s /e /h",
     "publish": "rd /s /q docs & yarn fetch && yarn build & yarn copy",
-    "fetch": "git submodule update --remote"
+    "fetch": "git submodule add https://github.com/dubisdev/todoist-rest-client-documentation repo"
 
   }
 }
