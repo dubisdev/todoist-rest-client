@@ -3,7 +3,7 @@
     "build": "cd repo && yarn && yarn build",
     "copy": "Xcopy repo\\build docs\\ /s /e /h",
     "publish": "rd /s /q docs & rd /s /q repo & git add . & git commit -m \"removing olf files\" & yarn fetch && yarn build & yarn copy",
-    "fetch": "git submodule --force add https://github.com/dubisdev/todoist-rest-client-documentation repo"
+    "fetch": "git submodule add --force https://github.com/dubisdev/todoist-rest-client-documentation repo"
 
   }
 }
