@@ -2,7 +2,7 @@
   "scripts": {
     "build": "cd repo && yarn && yarn build",
     "copy": "Xcopy repo\\build docs\\ /s /e /h",
-    "publish": "rd /s /q docs & rd /s /q repo & git add . & git commit -m \"removing olf files\" & yarn fetch && yarn build & yarn copy && yarn send_gh",
+    "publish": "rd /s /q docs & rd /s /q repo & git add . & git commit -m \"Removing old files\" && yarn fetch && yarn build && yarn copy && yarn send_gh",
     "fetch": "git submodule add --force https://github.com/dubisdev/todoist-rest-client-documentation repo",
 
     "send_gh": "git add . && git commit -m \"Updating docs\" && git push"
