@@ -1,10 +1,6 @@
 name: Update docs
 
-on:
-  push:
-    branches:
-      - docs
-
+on: [push]
 jobs:
   build:
 
