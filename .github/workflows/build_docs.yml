@@ -45,9 +45,8 @@ jobs:
       
     - name: Copy repo/build to docs folder
       run: |
-        cd ..
         mkdir docs
-        ls && cp -R repo/build docs
+        ls && cp -R repo/build ./docs
         
     - name: Save changes on the repo
       run: |
