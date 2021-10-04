@@ -37,7 +37,9 @@ jobs:
         
         cd ..
         
-        ls && cp -R repo/build /docs
+        mkdir docs
+        
+        ls && cp -R repo/build docs
         
         git add . && git commit -m "Updating docs"
         
