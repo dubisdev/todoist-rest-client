@@ -21,11 +21,23 @@ jobs:
     - run: |
         git config user.name dubisdev
         git config user.email dubisdev@gmail.com
+        
         ls
         rm -r docs
         rm -r repo
         rm .gitmodules
         ls
-        git add . && git commit -m "Removing old files" 
         
-        yarn publicar
+        git add . && git commit -m "Removing old files"
+        
+        git submodule add --force https://github.com/dubisdev/todoist-rest-client-documentation repo
+        git submodule update --remote -f
+        
+        cd repo && yarn && yarn build
+        
+        ls && cp -R repo/build /docs
+        
+        git add . && git commit -m "Updating docs"
+        
+        git push
+        
