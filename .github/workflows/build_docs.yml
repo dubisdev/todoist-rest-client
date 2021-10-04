@@ -14,7 +14,6 @@ jobs:
       uses: actions/checkout@v2
       with:
         ref: docs
-        token: ${{ secrets.GH_TOKEN }}
         
     - name: Use Node.js version 14.x
       uses: actions/setup-node@v1
@@ -26,12 +25,10 @@ jobs:
         git config user.name dubisdev
         git config user.email dubisdev@gmail.com
         
-    - name: Delete old files
+    - name: Delete all old files
       run: |
         ls
-        rm -r docs
-        rm -r repo
-        rm .gitmodules
+        rm -r *
         ls
         
         git add .
