@@ -18,10 +18,14 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
-    - run: |
+
+    - name: Configure Git Username
+      run: |
         git config user.name dubisdev
         git config user.email dubisdev@gmail.com
         
+    - name: Delete old files
+      run: |
         ls
         rm -r docs
         rm -r repo
@@ -29,19 +33,24 @@ jobs:
         ls
         
         git add . && git commit -m "Removing old files"
-        
+    
+    - name: Submodule Docs Repo
+      run: |
         git submodule add --force https://github.com/dubisdev/todoist-rest-client-documentation repo
         git submodule update --remote -f
         
+    - name: Build docs website
+      run: |
         cd repo && yarn && yarn build
-        
+      
+    - name: Copy repo/build to docs folder
+      run: |
         cd ..
-        
         mkdir docs
-        
         ls && cp -R repo/build docs
         
+    - name: Save changes on the repo
+      run: |
         git add . && git commit -m "Updating docs"
-        
         git push
         
