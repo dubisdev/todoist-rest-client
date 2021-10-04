@@ -24,7 +24,7 @@ jobs:
         rm -r repo
         rm .gitmodules
         ls
-        git add . && git commit -m \"Removing old files\" 
+        git add . && git commit -m "Removing old files" 
         git config user.name dubisdev
         git config user.email dubisdev@gmail.com
         yarn publicar
