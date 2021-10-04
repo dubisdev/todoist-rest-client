@@ -15,6 +15,7 @@ jobs:
       uses: actions/checkout@v2
       with:
         ref: docs
+        token: ${{ secrets.GH_TOKEN }}
 
     - name: Configure Git Username
       run: |
