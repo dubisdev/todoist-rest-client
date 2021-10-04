@@ -4,7 +4,7 @@
     "copy": "cp -R repo/build /docs",
     "fetch": "git submodule add --force https://github.com/dubisdev/todoist-rest-client-documentation repo && git submodule update --remote -f",
     "send_gh": "git add . && git commit -m \"Updating docs\" && git push",
-    "publicar": "rm -r docs & rm -r repo & git add . & git commit -m \"Removing old files\" && yarn fetch && yarn build && yarn copy && yarn send_gh"
+    "publicar": "rm -v !(\"package.json\"|\"LICENSE\") & git add . & git commit -m \"Removing old files\" && yarn fetch && yarn build && yarn copy && yarn send_gh"
 
   }
 }
