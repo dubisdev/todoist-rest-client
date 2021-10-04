@@ -19,12 +19,13 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: |
+        git config user.name dubisdev
+        git config user.email dubisdev@gmail.com
         ls
         rm -r docs
         rm -r repo
         rm .gitmodules
         ls
         git add . && git commit -m "Removing old files" 
-        git config user.name dubisdev
-        git config user.email dubisdev@gmail.com
+        
         yarn publicar
