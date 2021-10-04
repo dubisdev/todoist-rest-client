@@ -11,13 +11,10 @@ jobs:
         node-version: [16.x]
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout repo
+      uses: actions/checkout@v2
       with:
         ref: docs
-    - name: Build & Publish
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.node-version }}
 
     - name: Configure Git Username
       run: |
@@ -46,7 +43,7 @@ jobs:
     - name: Copy repo/build to docs folder
       run: |
         mkdir docs
-        ls && cp -R repo/build ./docs
+        ls && cp -a repo/build/. docs/
         
     - name: Save changes on the repo
       run: |
