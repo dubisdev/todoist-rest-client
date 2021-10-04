@@ -1,14 +1,13 @@
 name: Update docs
 
-on: [push]
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: 0 23 * * *
+    
 jobs:
-  build:
-
+  generateDocsWebpage:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [16.x]
 
     steps:
     - name: Checkout repo
@@ -16,6 +15,11 @@ jobs:
       with:
         ref: docs
         token: ${{ secrets.GH_TOKEN }}
+        
+    - name: Use Node.js version 14.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: 14.x
 
     - name: Configure Git Username
       run: |
@@ -30,7 +34,8 @@ jobs:
         rm .gitmodules
         ls
         
-        git add . && git commit -m "Removing old files"
+        git add .
+        git commit -m "Removing old files"
     
     - name: Submodule Docs Repo
       run: |
@@ -39,15 +44,19 @@ jobs:
         
     - name: Build docs website
       run: |
-        cd repo && yarn && yarn build
+        cd repo
+        yarn
+        yarn build
       
     - name: Copy repo/build to docs folder
       run: |
         mkdir docs
-        ls && cp -a repo/build/. docs/
+        ls
+        cp -a repo/build/. docs/
         
     - name: Save changes on the repo
       run: |
-        git add . && git commit -m "Updating docs"
+        git add .
+        git commit -m "Updating docs"
         git push
         
