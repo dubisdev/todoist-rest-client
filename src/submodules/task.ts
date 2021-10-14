@@ -1,4 +1,4 @@
-import Task from "../resources/Task.js";
+import Task from "../resources/Task";
 import axios from "axios";
 import { AuthHeader } from "../ExternalInterfaces";
 

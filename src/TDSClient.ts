@@ -1,5 +1,5 @@
-import task from "./submodules/task.js";
-import project from "./submodules/project.js";
+import task from "./submodules/task";
+import project from "./submodules/project";
 
 const TDSClientConstructor = (apiToken: string = ""): TDSClient => {
 	if (!apiToken) throw new Error("Missing api token");

@@ -1,4 +1,4 @@
-import TDSClient from "./TDSClient.js";
+import TDSClient from "./TDSClient";
 
-export { Task, Project } from "./resources/index.js";
+export { Task, Project } from "./resources/index";
 export default TDSClient;

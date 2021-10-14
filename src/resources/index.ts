@@ -1,4 +1,4 @@
-import Task from "./Task.js";
-import Project from "./Project.js";
+import Task from "./Task";
+import Project from "./Project";
 
 export { Task, Project };
