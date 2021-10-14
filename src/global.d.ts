@@ -1,7 +1,3 @@
-declare interface AuthHeader {
-	Authorization: string;
-}
-
 declare interface UserCreatedProject {
 	name?: string;
 	parent_id?: string;
