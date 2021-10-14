@@ -1,7 +1,7 @@
 import Project from "../resources/Project.js";
 import axios from "axios";
 
-const projectAPIModule = (headers: AuthHeader): ProjectAPIObject => {
+const projectClientModule = (headers: AuthHeader): ProjectModule => {
 	async function getOneJSON(id: number | string, headers: AuthHeader) {
 		return await axios
 			.get(`https://api.todoist.com/rest/v1/projects/${id}`, {
@@ -40,10 +40,10 @@ const projectAPIModule = (headers: AuthHeader): ProjectAPIObject => {
 
 		getAllJSON: async () => await getAllJSON(headers),
 
-		get: async (id: string | number) => {
+		get: async (id) => {
 			let project = await getOneJSON(id, headers);
 			return project;
 		},
 	};
 };
-export default projectAPIModule;
+export default projectClientModule;
