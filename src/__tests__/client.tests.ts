@@ -2,7 +2,7 @@ import TDSClient from "../index";
 
 describe("Module importing and Client initialization", () => {
 	test("Correctly imported and exported", () => {
-		expect(typeof TDSClient).toBe("function");
+		expect(typeof TDSClient).toBe("functon");
 	});
 
 	test("Trhow error when no token", () => {
