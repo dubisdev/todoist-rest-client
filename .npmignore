@@ -6,3 +6,4 @@
 # Config files
 /node_modules
 tsconfig.json
+jest.config.mjs
