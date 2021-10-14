@@ -1,4 +1,8 @@
-testing.js
-
+# Project & repo actions files
 /core
-esbuild.js
+/.github
+.gitignore
+
+# Config files
+/node_modules
+tsconfig.json

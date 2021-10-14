@@ -1,7 +1,7 @@
-import task from "./client_modules/task.js";
-import project from "./client_modules/project.js";
+import task from "./submodules/task.js";
+import project from "./submodules/project.js";
 
-const TDSClient = (apiToken) => {
+const TDSClientConstructor = (apiToken: string = ""): TDSClient => {
 	if (!apiToken) throw new Error("Missing api token");
 
 	const headers = { Authorization: `Bearer ${apiToken}` };
@@ -13,4 +13,4 @@ const TDSClient = (apiToken) => {
 	};
 };
 
-export default TDSClient;
+export default TDSClientConstructor;

@@ -1,23 +1,25 @@
 import Task from "../resources/Task.js";
 import axios from "axios";
+import { AuthHeader } from "../ExternalInterfaces";
 
-async function getAllJSON(headers) {
-	return await axios
-		.get(`https://api.todoist.com/rest/v1/tasks`, { headers })
-		.then((res = {}) => res.data);
-}
+const taskClientModule = (headers: AuthHeader): TaskModule => {
+	async function getOneJSON(id: number | string, headers: AuthHeader) {
+		return await axios
+			.get(`https://api.todoist.com/rest/v1/tasks/${id}`, {
+				headers,
+			})
+			.then((res) => res.data as APITaskObject);
+	}
 
-async function getOneJSON(id, headers) {
-	return await axios
-		.get(`https://api.todoist.com/rest/v1/tasks/${id}`, {
-			headers,
-		})
-		.then((res = {}) => res.data);
-}
+	async function getAllJSON(headers: AuthHeader) {
+		return await axios
+			.get(`https://api.todoist.com/rest/v1/tasks`, { headers })
+			.then((res) => res.data as APITaskObject[]);
+	}
 
-const task = (headers) => {
 	return {
-		create: async (task = new Task()) => {
+		create: async (task) => {
+			if (!(<UserCreatedTask>task?.content)) task = Task(task);
 			return await axios.post(`https://api.todoist.com/rest/v1/tasks`, task, {
 				headers,
 			});
@@ -25,20 +27,18 @@ const task = (headers) => {
 
 		getAll: async () => {
 			let json = await getAllJSON(headers);
-			let arrayTasks = [];
+			let arrayTasks: string[] = [];
 			json.map((task) => {
 				arrayTasks.push(task.content);
 			});
 			return arrayTasks;
 		},
 
-		getAllJSON: async () => {
-			return await getAllJSON(headers);
-		},
+		getAllJSON: async () => await getAllJSON(headers),
 
 		getToday: async () => {
 			let json = await getAllJSON(headers);
-			let arrayTasks = [];
+			let arrayTasks: string[] = [];
 
 			let todayTasksJson = json
 				.filter((task) => task.due !== undefined)
@@ -69,7 +69,7 @@ const task = (headers) => {
 			return await getOneJSON(id, headers);
 		},
 
-		completeTask: async (id) => {
+		closeTask: async (id) => {
 			return await axios.post(
 				`https://api.todoist.com/rest/v1/tasks/${id}/close`,
 				{},
@@ -81,4 +81,4 @@ const task = (headers) => {
 	};
 };
 
-export default task;
+export default taskClientModule;
