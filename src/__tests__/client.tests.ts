@@ -10,6 +10,6 @@ describe("Module importing and Client initialization", () => {
 	});
 
 	test("Create client when token exists", () => {
-		expect(() => TDSClient("here_goes_a_token")).not.toThrow();
+		expect(() => TDSClient("token")).not.toThrow();
 	});
 });
