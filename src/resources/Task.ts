@@ -1,5 +1,5 @@
 const Task = (task: UserCreatedTask = {}): ClientCreatedTask => {
-	const { content = "_No_Project_Name_Provided_", ...restOfProperties } = task;
+	const { content = "_No_Task_Name_Provided_", ...restOfProperties } = task;
 
 	return {
 		content,
