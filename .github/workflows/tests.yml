@@ -3,5 +3,17 @@ name: Run Tests
 on: [pull_request]
 
 jobs:
-  Run-Tests:
-    uses: dubisdev/ghwf/.github/workflows/tests-node-yarn.yml@main
+  run_tests:
+    name: Run Node Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - name: Installing project dependencies
+        run: yarn
+      - name: Running tests
+        run: yarn test
+        env:
+          TODOIST_TOKEN: ${{ secrets.TODOIST_TOKEN }}
