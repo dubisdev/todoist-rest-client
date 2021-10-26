@@ -12,7 +12,7 @@
     "rest-client"
   ],
   "dependencies": {
-    "axios": "^0.23.0"
+    "axios": "^0.24.0"
   },
   "devDependencies": {
     "@types/jest": "^27.0.2",
