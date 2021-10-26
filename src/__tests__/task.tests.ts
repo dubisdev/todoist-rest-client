@@ -7,7 +7,7 @@ const generalExpectedTask = Task({
 });
 let generalExpectedTaskID: number;
 
-describe("Client Task Creation", () => {
+describe("Client-Side Task Creation", () => {
 	test("Create Empty Task", () => {
 		const emptyTask = Task();
 		expect(emptyTask).toMatchObject<ClientCreatedTask>({
@@ -47,8 +47,7 @@ describe("API Tasks Functions", () => {
 		generalExpectedTaskID = apiTask.id;
 	});
 
-	test("Search A Task", async () => {
-		// creates the task in the server
+	test("Get A Task", async () => {
 		let apiTask = await myClient.task.get(generalExpectedTaskID);
 
 		expect(apiTask.content).toBe(generalExpectedTask.content);
