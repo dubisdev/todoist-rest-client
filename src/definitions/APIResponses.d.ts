@@ -36,3 +36,12 @@ declare interface APITaskObject {
 	parent_id: number;
 	url: string;
 }
+
+declare interface AxiosResponse<T = any, D = any> {
+	data: T;
+	status: number;
+	statusText: string;
+	headers: AxiosResponseHeaders;
+	config: AxiosRequestConfig<D>;
+	request?: any;
+}

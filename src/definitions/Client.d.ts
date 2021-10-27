@@ -3,3 +3,7 @@ declare interface TDSClient {
 	task: TaskModule;
 	project: ProjectModule;
 }
+
+declare interface ClientConstructor {
+	(apiToken?: string): TDSClient;
+}

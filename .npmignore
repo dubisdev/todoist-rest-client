@@ -2,6 +2,7 @@
 /src
 /.github
 .gitignore
+.env
 
 # Config files
 /node_modules

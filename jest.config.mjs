@@ -1,7 +1,5 @@
-/*
- * For a detailed explanation regarding each configuration property, visit:
- * https://jestjs.io/docs/configuration
- */
+import dotenv from "dotenv";
+dotenv.config();
 
 export default {
 	extensionsToTreatAsEsm: [".ts"],
@@ -14,7 +12,7 @@ export default {
 	moduleNameMapper: {
 		"^(\\.{1,2}/.*)\\.js$": "$1",
 	},
-	
+
 	preset: "ts-jest/presets/js-with-ts-esm",
 	rootDir: "src",
 };
