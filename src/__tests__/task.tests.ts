@@ -55,6 +55,19 @@ describe("API Tasks Functions", () => {
 		expect(status).toBe(204);
 	});
 
+	/* Returns internal server error
+	test("Reopen A Task", async () => {
+		let status = (await myClient.task.reopen(generalExpectedTaskID)).status;
+
+		expect(status).toBe(204);
+	});
+	*/
+
+	test("Delete A Tasks", async () => {
+		let status = (await myClient.task.delete(generalExpectedTaskID)).status;
+		expect(status).toBe(204);
+	});
+
 	// no active tasks now
 	test("Create Two Tasks", async () => {
 		await myClient.task.create({ content: "First task" });

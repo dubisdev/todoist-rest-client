@@ -37,6 +37,15 @@ const taskClientModule = (headers: AuthHeader): TaskModule => {
 			);
 		},
 
+		reopen: async (id) => {
+			return await axios.post(
+				`https://api.todoist.com/rest/v1/tasks/${id}/reopen`,
+				{
+					headers,
+				}
+			);
+		},
+
 		delete: async (id) => {
 			return await axios.delete(`https://api.todoist.com/rest/v1/tasks/${id}`, {
 				headers,
