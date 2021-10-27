@@ -29,7 +29,9 @@ describe("API Tasks Functions", () => {
 		let apiTask = await myClient.task
 			.create(generalExpectedTask)
 			// @ts-ignore: Task.create should return APITaskObject
-			.then((res) => res.data);
+			.then((res) => res.data as APITaskObject);
+
+		expect(apiTask.id).toBeTruthy();
 
 		//fix needed --> task.create should return an APITaskObject --> issue #15
 
@@ -54,13 +56,9 @@ describe("API Tasks Functions", () => {
 	});
 
 	test("Close A Task", async () => {
-		await myClient.task.closeTask(generalExpectedTaskID);
+		let status = (await myClient.task.closeTask(generalExpectedTaskID)).status;
 
-		let errorResponse = await myClient.task
-			.get(generalExpectedTaskID)
-			.catch(({ response }) => response);
-
-		expect(errorResponse.status).toBe(404);
+		expect(status).toBe(204);
 	});
 
 	// no active tasks now
@@ -79,7 +77,6 @@ describe("API Tasks Functions", () => {
 		);
 
 		expect(responseTasks.length).toBe(2);
-		expect(typeof responseTasks[0]).toBe("object");
 
 		expect(firstTaskExists).toBe(true);
 		expect(secondTaskExists).toBe(true);
@@ -93,7 +90,6 @@ describe("API Tasks Functions", () => {
 		);
 
 		expect(responseTasks.length).toBe(2);
-		expect(typeof responseTasks[0]).toBe("string");
 
 		expect(firstTaskExists).toBe(true);
 		expect(secondTaskExists).toBe(true);
@@ -103,12 +99,9 @@ describe("API Tasks Functions", () => {
 		let allTasksJSON = await myClient.task.getAllJSON();
 
 		for (let i = 0; i < allTasksJSON.length; ++i) {
-			await myClient.task.closeTask(allTasksJSON[i].id);
+			let status = (await myClient.task.closeTask(allTasksJSON[i].id)).status;
+			expect(status).toBe(204);
 		}
-
-		const responseTasks = await myClient.task.getAll();
-
-		expect(responseTasks.length).toBe(0);
 	});
 
 	// no active tasks now
