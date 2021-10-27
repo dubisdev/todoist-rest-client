@@ -45,6 +45,15 @@ const projectClientModule = (headers: AuthHeader): ProjectModule => {
 			let project = await getOneJSON(id, headers);
 			return project;
 		},
+
+		delete: async (id) => {
+			return await axios.delete(
+				`https://api.todoist.com/rest/v1/projects/${id}`,
+				{
+					headers,
+				}
+			);
+		},
 	};
 };
 export default projectClientModule;
