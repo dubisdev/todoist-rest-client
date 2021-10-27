@@ -11,7 +11,7 @@ declare interface TaskModule {
 	create: (
 		task?: UserCreatedTask | ClientCreatedTask
 	) => Promise<APITaskObject>;
-	closeTask: (id: number | string) => Promise<void>;
+	closeTask: (id: number | string) => Promise<AxiosResponse>;
 	getAll: () => Promise<string[]>;
 	getAllJSON: () => Promise<APITaskObject[]>;
 	getToday: () => Promise<string[]>;
