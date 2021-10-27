@@ -24,28 +24,13 @@ describe("Client-Side Task Creation", () => {
 
 describe("API Tasks Functions", () => {
 	test("Create A Task", async () => {
-		// creates the task in the server
-
-		let apiTask = await myClient.task
-			.create(generalExpectedTask)
-			// @ts-ignore: Task.create should return APITaskObject
-			.then((res) => res.data as APITaskObject);
-
-		expect(apiTask.id).toBeTruthy();
-
-		//fix needed --> task.create should return an APITaskObject --> issue #15
-
-		/*
-        let apiTask = await myClient.task.create(generalExpectedTask);
-        expect(apiTask).toMatchObject<APITaskObject>({
+		let apiTask = await myClient.task.create(generalExpectedTask);
+		expect(apiTask).toMatchObject<APITaskObject>({
 			...apiTask,
 			content: "Hello world",
 		});
 
-		save the task id for next tests
-		generalExpectedTaskID = apiTask.id;*/
-
-		//save the task id for next tests
+		//save task id for next tests
 		generalExpectedTaskID = apiTask.id;
 	});
 

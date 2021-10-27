@@ -20,9 +20,11 @@ const taskClientModule = (headers: AuthHeader): TaskModule => {
 	return {
 		create: async (task) => {
 			if (!(<UserCreatedTask>task?.content)) task = Task(task);
-			return await axios.post(`https://api.todoist.com/rest/v1/tasks`, task, {
-				headers,
-			});
+			return await axios
+				.post(`https://api.todoist.com/rest/v1/tasks`, task, {
+					headers,
+				})
+				.then((res) => res.data as APITaskObject);
 		},
 
 		getAll: async () => {
