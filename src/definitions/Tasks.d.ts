@@ -1,5 +1,6 @@
 declare interface UserCreatedTask {
 	content?: string;
+	description?: string;
 	project_id?: string;
 	section_id?: string;
 	parent_id?: string;
