@@ -5,6 +5,7 @@ declare interface ProjectModule {
 	getAll: () => Promise<string[]>;
 	getAllJSON: () => Promise<APIProjectObject[]>;
 	get: (id: string | number) => Promise<APIProjectObject>;
+	delete: (id: string | number) => Promise<AxiosResponse>;
 }
 
 declare interface TaskModule {
