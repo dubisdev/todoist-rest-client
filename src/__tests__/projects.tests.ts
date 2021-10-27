@@ -30,6 +30,8 @@ describe("API Project Functions", () => {
 
 		let apiProject = await myClient.project.create(generalExpectedProject);
 
+		expect(apiProject.id).toBeTruthy();
+
 		generalExpectedProjectID = apiProject.id;
 	});
 
