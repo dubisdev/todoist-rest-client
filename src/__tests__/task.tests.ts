@@ -89,11 +89,11 @@ describe("API Tasks Functions", () => {
 		expect(secondTaskExists).toBe(true);
 	});
 
-	test("Complete All Previous Tasks", async () => {
+	test("Delete All Previous Tasks", async () => {
 		let allTasksJSON = await myClient.task.getAllJSON();
 
 		for (let i = 0; i < allTasksJSON.length; ++i) {
-			let status = (await myClient.task.closeTask(allTasksJSON[i].id)).status;
+			let status = (await myClient.task.delete(allTasksJSON[i].id)).status;
 			expect(status).toBe(204);
 		}
 	});

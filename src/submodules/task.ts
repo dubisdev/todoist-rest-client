@@ -37,6 +37,12 @@ const taskClientModule = (headers: AuthHeader): TaskModule => {
 			);
 		},
 
+		delete: async (id) => {
+			return await axios.delete(`https://api.todoist.com/rest/v1/tasks/${id}`, {
+				headers,
+			});
+		},
+
 		getAll: async () => {
 			let json = await getAllJSON(headers);
 			let arrayTasks: string[] = [];

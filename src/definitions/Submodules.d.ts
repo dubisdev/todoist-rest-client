@@ -24,4 +24,5 @@ declare interface TaskModule {
 		id: number | string,
 		task: TaskUpdatableParameters
 	) => Promise<AxiosResponse>;
+	delete: (id: number | string) => Promise<AxiosResponse>;
 }
