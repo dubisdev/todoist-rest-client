@@ -27,6 +27,16 @@ const taskClientModule = (headers: AuthHeader): TaskModule => {
 				.then((res) => res.data as APITaskObject);
 		},
 
+		update: async (id, task) => {
+			return await axios.post(
+				`https://api.todoist.com/rest/v1/tasks/${id}`,
+				task,
+				{
+					headers,
+				}
+			);
+		},
+
 		getAll: async () => {
 			let json = await getAllJSON(headers);
 			let arrayTasks: string[] = [];

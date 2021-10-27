@@ -34,10 +34,19 @@ describe("API Tasks Functions", () => {
 		generalExpectedTaskID = apiTask.id;
 	});
 
+	test("Update A Task", async () => {
+		let response = await myClient.task.update(generalExpectedTaskID, {
+			content: "Updated Task",
+			priority: 2,
+		});
+
+		expect(response.status).toBe(204);
+	});
+
 	test("Get A Task", async () => {
 		let apiTask = await myClient.task.get(generalExpectedTaskID);
 
-		expect(apiTask.content).toBe(generalExpectedTask.content);
+		expect(apiTask.content).toBe("Updated Task");
 	});
 
 	test("Close A Task", async () => {

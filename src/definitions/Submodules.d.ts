@@ -20,4 +20,8 @@ declare interface TaskModule {
 	getAll: () => Promise<string[]>;
 	getAllJSON: () => Promise<APITaskObject[]>;
 	get: (id: string | number) => Promise<APITaskObject>;
+	update: (
+		id: number | string,
+		task: TaskUpdatableParameters
+	) => Promise<AxiosResponse>;
 }
