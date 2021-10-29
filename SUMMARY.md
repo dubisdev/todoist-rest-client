@@ -1,10 +1,14 @@
 # Table of contents
 
-* [Welcome!](README.md)
+* [JS Todoist-Rest-Client](README.md)
 * [Quick Start](quick-start.md)
 
 ## Reference
 
 * [API Reference](reference/api-reference/README.md)
-  * [Pets](reference/api-reference/pets.md)
-  * [Users](reference/api-reference/users.md)
+  * [Tasks](reference/api-reference/tasks/README.md)
+    * [Create Tasks](reference/api-reference/tasks/create-tasks.md)
+    * [Complete a task](reference/api-reference/tasks/complete-a-task.md)
+    * [Get A Task](reference/api-reference/tasks/get-a-task.md)
+    * [Get All Tasks](reference/api-reference/tasks/get-all-tasks.md)
+    * [Get Today Tasks](reference/api-reference/tasks/get-today-tasks.md)
