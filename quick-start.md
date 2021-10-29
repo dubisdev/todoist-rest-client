@@ -1,9 +1,5 @@
 # Quick Start
 
-{% hint style="info" %}
-**Good to know:** A quick start guide can be good to help folks get up and running with your API in a few steps. Some people prefer diving in with the basics rather than meticulously reading every page of documentation!
-{% endhint %}
-
 ## Get an API key
 
 The requests are authenticated using API keys. Any request that doesn't include an API key will return an error.
