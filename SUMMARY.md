@@ -12,3 +12,6 @@
     * [Get A Task](reference/api-reference/tasks/get-a-task.md)
     * [Get All Tasks](reference/api-reference/tasks/get-all-tasks.md)
     * [Get Today Tasks](reference/api-reference/tasks/get-today-tasks.md)
+    * [Reopen a Task](reference/api-reference/tasks/reopen-a-task.md)
+    * [Delete a task](reference/api-reference/tasks/delete-a-task.md)
+    * [Update a task](reference/api-reference/tasks/update-a-task.md)
