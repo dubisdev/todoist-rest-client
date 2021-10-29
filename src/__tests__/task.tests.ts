@@ -1,4 +1,5 @@
 import TDSClient, { Task } from "..";
+import { APITaskObject, ClientCreatedTask } from "../definitions";
 
 const myClient = TDSClient(process.env.TODOIST_TOKEN);
 

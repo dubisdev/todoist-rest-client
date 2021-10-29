@@ -1,4 +1,5 @@
 import TDSClient, { Project } from "..";
+import { ClientCreatedProject } from "../definitions";
 
 const myClient = TDSClient(process.env.TODOIST_TOKEN);
 

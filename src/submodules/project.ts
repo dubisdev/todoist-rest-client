@@ -1,6 +1,11 @@
 import Project from "../resources/Project";
 import axios from "axios";
-import { AuthHeader } from "../definitions/ExternalInterfaces";
+import { AuthHeader } from "../definitions";
+import {
+	APIProjectObject,
+	ProjectModule,
+	UserCreatedProject,
+} from "../definitions";
 
 const projectClientModule = (headers: AuthHeader): ProjectModule => {
 	async function getOneJSON(id: number | string, headers: AuthHeader) {

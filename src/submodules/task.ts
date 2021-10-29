@@ -1,6 +1,11 @@
 import Task from "../resources/Task";
 import axios from "axios";
-import { AuthHeader } from "../definitions/ExternalInterfaces";
+import {
+	APITaskObject,
+	AuthHeader,
+	TaskModule,
+	UserCreatedTask,
+} from "../definitions";
 
 const taskClientModule = (headers: AuthHeader): TaskModule => {
 	async function getOneJSON(id: number | string, headers: AuthHeader) {
