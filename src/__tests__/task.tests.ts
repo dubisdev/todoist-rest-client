@@ -1,7 +1,26 @@
 import TDSClient, { Task } from "..";
 import { APITaskObject, ClientCreatedTask } from "../definitions";
+import moment from "moment";
 
 const myClient = TDSClient(process.env.TODOIST_TOKEN);
+
+beforeAll(async () => {
+	let allTasksJSON = await myClient.task.getAllJSON();
+
+	for (let i = 0; i < allTasksJSON.length; ++i) {
+		await myClient.task.delete(allTasksJSON[i].id);
+	}
+	console.log("Init: Deleted all tasks!");
+});
+
+afterAll(async () => {
+	let allTasksJSON = await myClient.task.getAllJSON();
+
+	for (let i = 0; i < allTasksJSON.length; ++i) {
+		await myClient.task.delete(allTasksJSON[i].id);
+	}
+	console.log("Finish: Deleted all tasks!");
+});
 
 const generalExpectedTask = Task({
 	content: "Hello world",
@@ -113,7 +132,7 @@ describe("API Tasks Functions", () => {
 	});
 
 	// no active tasks now
-	/* Not working now because of #19
+
 	test("Create Two Tasks For Today", async () => {
 		// create tasks in today inbox
 		const due_info = {
@@ -132,12 +151,20 @@ describe("API Tasks Functions", () => {
 			(taskObj) => taskObj.content === "Second task"
 		);
 
-		console.log(allTodayJSON);
+		let normalDate = new Date().toISOString().substring(0, 10);
+		let momentDate = moment.parseZone(new Date()).format().substring(0, 10);
 
-		expect(allTodayJSON.length).toBe(2);
-		expect(typeof allTodayJSON[0]).toBe("object");
-		expect(firstTaskExists).toBe(true);
-		expect(secondTaskExists).toBe(true);
+		if (normalDate === momentDate) {
+			// GMT day = local day
+			expect(allTodayJSON.length).toBe(2);
+			expect(typeof allTodayJSON[0]).toBe("object");
+			expect(firstTaskExists).toBe(true);
+			expect(secondTaskExists).toBe(true);
+		} else {
+			// GMT day != local day (offset influence in day)
+			expect(allTodayJSON.length).toBe(0);
+			expect(firstTaskExists).toBe(false);
+			expect(secondTaskExists).toBe(false);
+		}
 	});
-	*/
 });
