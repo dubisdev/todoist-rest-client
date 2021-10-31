@@ -6,6 +6,7 @@ import {
 	TaskModule,
 	UserCreatedTask,
 } from "../definitions";
+import moment from "moment";
 
 const taskClientModule = (headers: AuthHeader): TaskModule => {
 	async function getOneJSON(id: number | string, headers: AuthHeader) {
@@ -75,7 +76,9 @@ const taskClientModule = (headers: AuthHeader): TaskModule => {
 			let todayTasksJson = json
 				.filter((task) => task.due !== undefined)
 				.filter(
-					(task) => task.due.date === new Date().toISOString().substring(0, 10)
+					(task) =>
+						task.due.date ===
+						moment.parseZone(new Date()).format().substring(0, 10)
 				);
 
 			todayTasksJson.map((task) => {
@@ -91,7 +94,9 @@ const taskClientModule = (headers: AuthHeader): TaskModule => {
 			let todayTasksJson = json
 				.filter((task) => task.due !== undefined)
 				.filter(
-					(task) => task.due.date === new Date().toISOString().substring(0, 10)
+					(task) =>
+						task.due.date ===
+						moment.parseZone(new Date()).format().substring(0, 10)
 				);
 
 			return todayTasksJson;
