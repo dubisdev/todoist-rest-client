@@ -91,6 +91,14 @@ describe("API Project Functions", () => {
 		expect(repsonse.status).toBe(204);
 	});
 
+	test("Get collaborators", async () => {
+		const collabArray = await myClient.project.getCollaborators(
+			generalExpectedProjectID
+		);
+
+		expect(collabArray.length).toBe(0);
+	});
+
 	test("delete All Previous Projects", async () => {
 		let allProjectsJSON = await myClient.project.getAllJSON();
 

@@ -1,6 +1,6 @@
 import Project from "../resources/Project";
 import axios from "axios";
-import { AuthHeader } from "../definitions";
+import { AuthHeader, ProjectCollaborator } from "../definitions";
 import {
 	APIProjectObject,
 	ProjectModule,
@@ -49,6 +49,16 @@ const projectClientModule = (headers: AuthHeader): ProjectModule => {
 		get: async (id) => {
 			let project = await getOneJSON(id, headers);
 			return project;
+		},
+
+		getCollaborators: async (id) => {
+			const { data } = await axios.get(
+				`https://api.todoist.com/rest/v1/projects/${id}/collaborators`,
+				{
+					headers,
+				}
+			);
+			return data as ProjectCollaborator[];
 		},
 
 		delete: async (id) => {

@@ -12,6 +12,7 @@ export interface ProjectModule {
 		task: ProjectUpdatableParameters
 	) => Promise<AxiosResponse>;
 	delete: (id: string | number) => Promise<AxiosResponse>;
+	getCollaborators: (id: string | number) => Promise<ProjectCollaborator[]>;
 }
 
 /* CLIENT-LEVEL INTERFACES */
