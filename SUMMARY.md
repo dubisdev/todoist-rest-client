@@ -15,3 +15,4 @@
     * [Reopen a Task](reference/api-reference/tasks/reopen-a-task.md)
     * [Delete a task](reference/api-reference/tasks/delete-a-task.md)
     * [Update a task](reference/api-reference/tasks/update-a-task.md)
+    * [Search tasks](reference/api-reference/tasks/search-tasks.md)
