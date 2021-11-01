@@ -15,7 +15,7 @@ export interface ProjectModule {
 export interface UserCreatedProject {
 	name?: string;
 	parent_id?: string;
-	color?: string;
+	color?: ProjectColor;
 	favorite?: boolean;
 }
 
@@ -28,14 +28,49 @@ export interface ClientCreatedProject extends UserCreatedProject {
 export interface APIProjectObject {
 	id: number;
 	name: string;
-	comment_count: number;
-	order: number;
-	color: number;
-	shared: boolean;
-	sync_id: number;
-	favorite: boolean;
+	color: ProjectColor;
 	parent_id?: number;
-	team_inbox?: boolean;
-	inbox_project?: boolean;
+	order: number;
+	comment_count: number;
+	shared: boolean;
+	favorite: boolean;
+	inbox_project?: true;
+	team_inbox?: true;
+	sync_id: number;
 	url: string;
+}
+
+// See https://developer.todoist.com/rest/v1/#update-a-project
+export interface ProjectUpdatableParameters {
+	name?: string;
+	color?: ProjectColor;
+	favorite?: boolean;
+}
+
+export type ProjectColor =
+	| 30
+	| 31
+	| 32
+	| 33
+	| 34
+	| 35
+	| 36
+	| 37
+	| 38
+	| 39
+	| 40
+	| 41
+	| 42
+	| 43
+	| 44
+	| 45
+	| 46
+	| 47
+	| 48
+	| 49;
+
+export interface ProjectCollaborator {
+	id: number;
+	name: string;
+	email: string;
 }

@@ -23,17 +23,17 @@ export interface TaskModule {
 export interface UserCreatedTask {
 	content?: string;
 	description?: string;
-	project_id?: string;
-	section_id?: string;
-	parent_id?: string;
-	order?: string;
-	label_ids?: string;
-	priority?: string;
+	project_id?: number;
+	section_id?: number;
+	parent_id?: number;
+	order?: number;
+	label_ids?: number[];
+	priority?: 1 | 2 | 3 | 4;
 	due_string?: string;
 	due_date?: string;
 	due_datetime?: string;
 	due_lang?: string;
-	assignee?: string;
+	assignee?: number;
 }
 
 export interface ClientCreatedTask extends UserCreatedTask {
@@ -59,7 +59,7 @@ export interface APITaskObject {
 	id: number;
 	label_ids?: number[];
 	order: number;
-	priority: number;
+	priority: 1 | 2 | 3 | 4;
 	project_id: number;
 	section_id: number;
 	parent_id: number;
