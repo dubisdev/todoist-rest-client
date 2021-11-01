@@ -4,6 +4,7 @@ import {
 	APITaskObject,
 	AuthHeader,
 	TaskModule,
+	TaskSearchableParams,
 	UserCreatedTask,
 } from "../definitions";
 import moment from "moment";
@@ -17,9 +18,12 @@ const taskClientModule = (headers: AuthHeader): TaskModule => {
 			.then((res) => res.data as APITaskObject);
 	}
 
-	async function getAllJSON(headers: AuthHeader) {
+	async function getAllJSON(
+		headers: AuthHeader,
+		params?: TaskSearchableParams
+	) {
 		return await axios
-			.get(`https://api.todoist.com/rest/v1/tasks`, { headers })
+			.get(`https://api.todoist.com/rest/v1/tasks`, { headers, params })
 			.then((res) => res.data as APITaskObject[]);
 	}
 
@@ -67,7 +71,7 @@ const taskClientModule = (headers: AuthHeader): TaskModule => {
 			return arrayTasks;
 		},
 
-		getAllJSON: async () => await getAllJSON(headers),
+		getAllJSON: async (params?) => await getAllJSON(headers, params),
 
 		getToday: async () => {
 			let json = await getAllJSON(headers);
@@ -114,6 +118,10 @@ const taskClientModule = (headers: AuthHeader): TaskModule => {
 					headers,
 				}
 			);
+		},
+
+		search: async (params) => {
+			return await getAllJSON(headers, params);
 		},
 	};
 };

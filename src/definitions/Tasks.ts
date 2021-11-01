@@ -6,7 +6,7 @@ export interface TaskModule {
 	) => Promise<APITaskObject>;
 	closeTask: (id: number | string) => Promise<AxiosResponse>;
 	getAll: () => Promise<string[]>;
-	getAllJSON: () => Promise<APITaskObject[]>;
+	getAllJSON: (params?: TaskSearchableParams) => Promise<APITaskObject[]>;
 	getToday: () => Promise<string[]>;
 	getTodayJSON: () => Promise<APITaskObject[]>;
 	get: (id: string | number) => Promise<APITaskObject>;
@@ -16,6 +16,7 @@ export interface TaskModule {
 	) => Promise<AxiosResponse>;
 	delete: (id: number | string) => Promise<AxiosResponse>;
 	reopen: (id: number | string) => Promise<AxiosResponse>;
+	search: (params: TaskSearchableParams) => Promise<APITaskObject[]>;
 }
 
 /* CLIENT-LEVEL INTERFACES */
@@ -23,17 +24,17 @@ export interface TaskModule {
 export interface UserCreatedTask {
 	content?: string;
 	description?: string;
-	project_id?: string;
-	section_id?: string;
-	parent_id?: string;
-	order?: string;
-	label_ids?: string;
-	priority?: string;
+	project_id?: number;
+	section_id?: number;
+	parent_id?: number;
+	order?: number;
+	label_ids?: number[];
+	priority?: 1 | 2 | 3 | 4;
 	due_string?: string;
 	due_date?: string;
 	due_datetime?: string;
 	due_lang?: string;
-	assignee?: string;
+	assignee?: number;
 }
 
 export interface ClientCreatedTask extends UserCreatedTask {
@@ -59,7 +60,7 @@ export interface APITaskObject {
 	id: number;
 	label_ids?: number[];
 	order: number;
-	priority: number;
+	priority: 1 | 2 | 3 | 4;
 	project_id: number;
 	section_id: number;
 	parent_id: number;
@@ -77,4 +78,13 @@ export interface TaskUpdatableParameters {
 	due_datetime?: string;
 	due_lang?: string;
 	assignee?: number;
+}
+
+export interface TaskSearchableParams {
+	project_id?: number;
+	section_id?: number;
+	label_id?: number;
+	filter?: string;
+	lang?: string;
+	ids?: number[];
 }

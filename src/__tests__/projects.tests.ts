@@ -44,8 +44,10 @@ describe("API Project Functions", () => {
 
 	// 2 active projects now
 	test("Create Two Projects", async () => {
-		await myClient.project.create({ name: "P2" });
-		await myClient.project.create({ name: "P3" });
+		return await Promise.all([
+			myClient.project.create({ name: "P2" }),
+			myClient.project.create({ name: "P3" }),
+		]);
 	});
 
 	// 4 active projects now
@@ -83,17 +85,32 @@ describe("API Project Functions", () => {
 		expect(thirdProjectExists).toBe(true);
 	});
 
-	test("delete All Previous Projects", async () => {
-		let allProjectsJSON = await myClient.project.getAllJSON();
+	test("Update a project", async () => {
+		const repsonse = await myClient.project.update(generalExpectedProjectID, {
+			name: "New name",
+		});
 
-		for (let i = 0; i < allProjectsJSON.length; ++i) {
-			if (allProjectsJSON[i].name === "Inbox") continue; //Inbox cannot be deleted
-
-			let status = (await myClient.project.delete(allProjectsJSON[i].id))
-				.status;
-			expect(status).toBe(204);
-		}
+		expect(repsonse.status).toBe(204);
 	});
 
-	// 4 active projects now (3 + inbox)
+	test("Get collaborators", async () => {
+		const collabArray = await myClient.project.getCollaborators(
+			generalExpectedProjectID
+		);
+
+		expect(collabArray.length).toBe(0);
+	});
+
+	test("Delete All Previous Projects", async () => {
+		let allProjectsJSON = await myClient.project.getAllJSON();
+
+		let responses = await Promise.all(
+			allProjectsJSON.map(async (project) => {
+				if (!project.inbox_project) return myClient.project.delete(project.id);
+				else return { status: 204 };
+			})
+		);
+
+		responses.map(({ status }) => expect(status).toBe(204));
+	});
 });
