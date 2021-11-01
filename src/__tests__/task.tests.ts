@@ -13,15 +13,6 @@ beforeAll(async () => {
 	console.log("Init: Deleted all tasks!");
 });
 
-afterAll(async () => {
-	let allTasksJSON = await myClient.task.getAllJSON();
-
-	for (let i = 0; i < allTasksJSON.length; ++i) {
-		await myClient.task.delete(allTasksJSON[i].id);
-	}
-	console.log("Finish: Deleted all tasks!");
-});
-
 const generalExpectedTask = Task({
 	content: "Hello world",
 });
@@ -188,4 +179,13 @@ describe("API Tasks Functions", () => {
 		expect(firstTaskExists).toBe(true);
 		expect(secondTaskExists).toBe(true);
 	});
+});
+
+afterAll(async () => {
+	let allTasksJSON = await myClient.task.getAllJSON();
+
+	for (let i = 0; i < allTasksJSON.length; ++i) {
+		await myClient.task.delete(allTasksJSON[i].id);
+	}
+	console.log("Finish: Deleted all tasks!");
 });
