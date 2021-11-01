@@ -44,8 +44,10 @@ describe("API Project Functions", () => {
 
 	// 2 active projects now
 	test("Create Two Projects", async () => {
-		await myClient.project.create({ name: "P2" });
-		await myClient.project.create({ name: "P3" });
+		return await Promise.all([
+			myClient.project.create({ name: "P2" }),
+			myClient.project.create({ name: "P3" }),
+		]);
 	});
 
 	// 4 active projects now
@@ -99,15 +101,16 @@ describe("API Project Functions", () => {
 		expect(collabArray.length).toBe(0);
 	});
 
-	test("delete All Previous Projects", async () => {
+	test("Delete All Previous Projects", async () => {
 		let allProjectsJSON = await myClient.project.getAllJSON();
 
-		for (let i = 0; i < allProjectsJSON.length; ++i) {
-			if (allProjectsJSON[i].inbox_project) continue; //Inbox cannot be deleted
+		let responses = await Promise.all(
+			allProjectsJSON.map(async (project) => {
+				if (!project.inbox_project) return myClient.project.delete(project.id);
+				else return { status: 204 };
+			})
+		);
 
-			let status = (await myClient.project.delete(allProjectsJSON[i].id))
-				.status;
-			expect(status).toBe(204);
-		}
+		responses.map(({ status }) => expect(status).toBe(204));
 	});
 });

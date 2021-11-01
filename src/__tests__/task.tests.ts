@@ -6,10 +6,7 @@ const myClient = TDSClient(process.env.TODOIST_TOKEN);
 
 beforeAll(async () => {
 	let allTasksJSON = await myClient.task.getAllJSON();
-
-	for (let i = 0; i < allTasksJSON.length; ++i) {
-		await myClient.task.delete(allTasksJSON[i].id);
-	}
+	await Promise.all(allTasksJSON.map((task) => myClient.task.delete(task.id)));
 	console.log("Init: Deleted all tasks!");
 });
 
@@ -74,7 +71,7 @@ describe("API Tasks Functions", () => {
 	});
 	*/
 
-	test("Delete A Tasks", async () => {
+	test("Delete A Task", async () => {
 		let status = (await myClient.task.delete(generalExpectedTaskID)).status;
 		expect(status).toBe(204);
 	});
@@ -115,11 +112,11 @@ describe("API Tasks Functions", () => {
 
 	test("Delete All Previous Tasks", async () => {
 		let allTasksJSON = await myClient.task.getAllJSON();
+		let responses = await Promise.all(
+			allTasksJSON.map((task) => myClient.task.delete(task.id))
+		);
 
-		for (let i = 0; i < allTasksJSON.length; ++i) {
-			let status = (await myClient.task.delete(allTasksJSON[i].id)).status;
-			expect(status).toBe(204);
-		}
+		responses.map(({ status }) => expect(status).toBe(204));
 	});
 
 	// no active tasks now
@@ -130,8 +127,11 @@ describe("API Tasks Functions", () => {
 			due_lang: "en",
 			due_string: "today",
 		};
-		await myClient.task.create({ content: "First task", ...due_info });
-		await myClient.task.create({ content: "Second task", ...due_info });
+
+		await Promise.all([
+			myClient.task.create({ content: "First task", ...due_info }),
+			myClient.task.create({ content: "Second task", ...due_info }),
+		]);
 
 		//get created tasks
 		let allTodayJSON = await myClient.task.getTodayJSON();
@@ -183,9 +183,6 @@ describe("API Tasks Functions", () => {
 
 afterAll(async () => {
 	let allTasksJSON = await myClient.task.getAllJSON();
-
-	for (let i = 0; i < allTasksJSON.length; ++i) {
-		await myClient.task.delete(allTasksJSON[i].id);
-	}
+	await Promise.all(allTasksJSON.map((task) => myClient.task.delete(task.id)));
 	console.log("Finish: Deleted all tasks!");
 });
