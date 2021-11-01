@@ -59,6 +59,16 @@ const projectClientModule = (headers: AuthHeader): ProjectModule => {
 				}
 			);
 		},
+
+		update: async (id, project) => {
+			return await axios.post(
+				`https://api.todoist.com/rest/v1/projects/${id}`,
+				project,
+				{
+					headers,
+				}
+			);
+		},
 	};
 };
 export default projectClientModule;

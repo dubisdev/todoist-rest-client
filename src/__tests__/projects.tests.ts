@@ -83,17 +83,23 @@ describe("API Project Functions", () => {
 		expect(thirdProjectExists).toBe(true);
 	});
 
+	test("Update a project", async () => {
+		const repsonse = await myClient.project.update(generalExpectedProjectID, {
+			name: "New name",
+		});
+
+		expect(repsonse.status).toBe(204);
+	});
+
 	test("delete All Previous Projects", async () => {
 		let allProjectsJSON = await myClient.project.getAllJSON();
 
 		for (let i = 0; i < allProjectsJSON.length; ++i) {
-			if (allProjectsJSON[i].name === "Inbox") continue; //Inbox cannot be deleted
+			if (allProjectsJSON[i].inbox_project) continue; //Inbox cannot be deleted
 
 			let status = (await myClient.project.delete(allProjectsJSON[i].id))
 				.status;
 			expect(status).toBe(204);
 		}
 	});
-
-	// 4 active projects now (3 + inbox)
 });

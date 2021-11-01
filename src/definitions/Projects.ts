@@ -7,6 +7,10 @@ export interface ProjectModule {
 	getAll: () => Promise<string[]>;
 	getAllJSON: () => Promise<APIProjectObject[]>;
 	get: (id: string | number) => Promise<APIProjectObject>;
+	update: (
+		id: number | string,
+		task: ProjectUpdatableParameters
+	) => Promise<AxiosResponse>;
 	delete: (id: string | number) => Promise<AxiosResponse>;
 }
 
