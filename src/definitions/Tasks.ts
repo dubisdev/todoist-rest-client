@@ -6,7 +6,7 @@ export interface TaskModule {
 	) => Promise<APITaskObject>;
 	closeTask: (id: number | string) => Promise<AxiosResponse>;
 	getAll: () => Promise<string[]>;
-	getAllJSON: () => Promise<APITaskObject[]>;
+	getAllJSON: (params?: TaskSearchableParams) => Promise<APITaskObject[]>;
 	getToday: () => Promise<string[]>;
 	getTodayJSON: () => Promise<APITaskObject[]>;
 	get: (id: string | number) => Promise<APITaskObject>;
@@ -16,6 +16,7 @@ export interface TaskModule {
 	) => Promise<AxiosResponse>;
 	delete: (id: number | string) => Promise<AxiosResponse>;
 	reopen: (id: number | string) => Promise<AxiosResponse>;
+	search: (params: TaskSearchableParams) => Promise<APITaskObject[]>;
 }
 
 /* CLIENT-LEVEL INTERFACES */
@@ -77,4 +78,13 @@ export interface TaskUpdatableParameters {
 	due_datetime?: string;
 	due_lang?: string;
 	assignee?: number;
+}
+
+export interface TaskSearchableParams {
+	project_id?: number;
+	section_id?: number;
+	label_id?: number;
+	filter?: string;
+	lang?: string;
+	ids?: number[];
 }

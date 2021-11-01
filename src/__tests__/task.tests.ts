@@ -167,4 +167,25 @@ describe("API Tasks Functions", () => {
 			expect(secondTaskExists).toBe(false);
 		}
 	});
+
+	test("Search Tasks", async () => {
+		//search tasks
+		let searchedTasks = await myClient.task.search({
+			lang: "es",
+			filter: "(hoy | vencidas)",
+		});
+
+		const firstTaskExists = searchedTasks.some(
+			(taskObj) => taskObj.content === "First task"
+		);
+		const secondTaskExists = searchedTasks.some(
+			(taskObj) => taskObj.content === "Second task"
+		);
+
+		// GMT day = local day
+		expect(searchedTasks.length).toBe(2);
+		expect(typeof searchedTasks[0]).toBe("object");
+		expect(firstTaskExists).toBe(true);
+		expect(secondTaskExists).toBe(true);
+	});
 });
