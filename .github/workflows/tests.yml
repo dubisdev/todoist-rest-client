@@ -17,12 +17,7 @@ jobs:
         run: yarn test
         env:
           TODOIST_TOKEN: ${{ secrets.TODOIST_TOKEN }}
-
-  generateCoverage:
-    name: Upload Coverage to Codecov
-    runs-on: ubuntu-latest
-    steps:
-      - name: Upload coverage
+      - name: Upload Coverage to Codecov
         uses: codecov/codecov-action@v2.1.0
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
