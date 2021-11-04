@@ -3,6 +3,8 @@ dotenv.config();
 
 export default {
 	extensionsToTreatAsEsm: [".ts"],
+	collectCoverage: true,
+	coverageDirectory: "./coverage/",
 	coverageProvider: "v8",
 	globals: {
 		"ts-jest": {

@@ -135,9 +135,11 @@ describe("API Tasks Functions", () => {
 
 		//get created tasks
 		let allTodayJSON = await myClient.task.getTodayJSON();
-		const firstTaskExists = allTodayJSON.some(
-			(taskObj) => taskObj.content === "First task"
-		);
+		let allTodayNames = await myClient.task.getToday();
+
+		const firstTaskExists =
+			allTodayJSON.some((taskObj) => taskObj.content === "First task") &&
+			allTodayNames.some((name) => name === "First task");
 		const secondTaskExists = allTodayJSON.some(
 			(taskObj) => taskObj.content === "Second task"
 		);
