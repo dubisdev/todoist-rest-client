@@ -1,6 +1,7 @@
 import task from "./submodules/task";
 import project from "./submodules/project";
 import section from "./submodules/section";
+import label from "./submodules/label";
 import { ClientConstructor, TDSClient } from "./definitions";
 
 const TDSClientConstructor: ClientConstructor = (apiToken): TDSClient => {
@@ -13,6 +14,7 @@ const TDSClientConstructor: ClientConstructor = (apiToken): TDSClient => {
 		task: task(headers),
 		project: project(headers),
 		section: section(headers),
+		label: label(headers),
 	};
 };
 
