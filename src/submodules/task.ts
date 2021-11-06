@@ -1,58 +1,54 @@
-import Task from "../resources/Task";
 import axios from "axios";
 import {
 	APITaskObject,
 	AuthHeader,
 	TaskModule,
 	TaskSearchableParams,
-	UserCreatedTask,
 } from "../definitions";
 import moment from "moment";
 
 const taskClientModule = (headers: AuthHeader): TaskModule => {
 	async function getOneJSON(id: number | string, headers: AuthHeader) {
-		return await axios
-			.get(`https://api.todoist.com/rest/v1/tasks/${id}`, {
-				headers,
-			})
-			.then((res) => res.data as APITaskObject);
+		let { data } = await axios.get(
+			`https://api.todoist.com/rest/v1/tasks/${id}`,
+			{ headers }
+		);
+		return data as APITaskObject;
 	}
 
 	async function getAllJSON(
 		headers: AuthHeader,
 		params?: TaskSearchableParams
 	) {
-		return await axios
-			.get(`https://api.todoist.com/rest/v1/tasks`, { headers, params })
-			.then((res) => res.data as APITaskObject[]);
+		let { data } = await axios.get(`https://api.todoist.com/rest/v1/tasks`, {
+			headers,
+			params,
+		});
+		return data as APITaskObject[];
 	}
 
 	return {
 		create: async (task) => {
-			if (!(<UserCreatedTask>task?.content)) task = Task(task);
-			return await axios
-				.post(`https://api.todoist.com/rest/v1/tasks`, task, {
-					headers,
-				})
-				.then((res) => res.data as APITaskObject);
+			let { data } = await axios.post(
+				`https://api.todoist.com/rest/v1/tasks`,
+				task,
+				{ headers }
+			);
+			return data as APITaskObject;
 		},
 
 		update: async (id, task) => {
 			return await axios.post(
 				`https://api.todoist.com/rest/v1/tasks/${id}`,
 				task,
-				{
-					headers,
-				}
+				{ headers }
 			);
 		},
 
 		reopen: async (id) => {
 			return await axios.post(
 				`https://api.todoist.com/rest/v1/tasks/${id}/reopen`,
-				{
-					headers,
-				}
+				{ headers }
 			);
 		},
 
@@ -85,9 +81,7 @@ const taskClientModule = (headers: AuthHeader): TaskModule => {
 						moment.parseZone(new Date()).format().substring(0, 10)
 				);
 
-			todayTasksJson.map((task) => {
-				arrayTasks.push(task.content);
-			});
+			todayTasksJson.forEach((task) => arrayTasks.push(task.content));
 
 			return arrayTasks;
 		},
@@ -114,15 +108,11 @@ const taskClientModule = (headers: AuthHeader): TaskModule => {
 			return await axios.post(
 				`https://api.todoist.com/rest/v1/tasks/${id}/close`,
 				{},
-				{
-					headers,
-				}
+				{ headers }
 			);
 		},
 
-		search: async (params) => {
-			return await getAllJSON(headers, params);
-		},
+		search: async (params) => await getAllJSON(headers, params),
 	};
 };
 

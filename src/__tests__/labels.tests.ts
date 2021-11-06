@@ -5,7 +5,7 @@ const myClient = TDSClient(process.env.TODOIST_TOKEN);
 
 describe("Client-Side Label Creation", () => {
 	test("Create Empty Label", () => {
-		const emptyLabel = Label({});
+		const emptyLabel = Label();
 		expect(emptyLabel).toMatchObject<CreatableLabel>({
 			name: "_No_Label_Name_Provided_",
 		});

@@ -1,9 +1,7 @@
 import { AxiosResponse } from "axios";
 
 export interface ProjectModule {
-	create: (
-		project?: UserCreatedProject | ClientCreatedProject
-	) => Promise<APIProjectObject>;
+	create: (project: CreatableProject) => Promise<APIProjectObject>;
 	getAll: () => Promise<string[]>;
 	getAllJSON: () => Promise<APIProjectObject[]>;
 	get: (id: string | number) => Promise<APIProjectObject>;
@@ -24,7 +22,7 @@ export interface UserCreatedProject {
 	favorite?: boolean;
 }
 
-export interface ClientCreatedProject extends UserCreatedProject {
+export interface CreatableProject extends UserCreatedProject {
 	name: string;
 }
 

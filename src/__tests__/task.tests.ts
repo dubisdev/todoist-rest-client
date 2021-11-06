@@ -1,5 +1,5 @@
 import TDSClient, { Task } from "..";
-import { APITaskObject, ClientCreatedTask } from "../definitions";
+import { APITaskObject, CreatableTask } from "../definitions";
 import moment from "moment";
 
 const myClient = TDSClient(process.env.TODOIST_TOKEN);
@@ -18,13 +18,13 @@ let generalExpectedTaskID: number;
 describe("Client-Side Task Creation", () => {
 	test("Create Empty Task", () => {
 		const emptyTask = Task();
-		expect(emptyTask).toMatchObject<ClientCreatedTask>({
+		expect(emptyTask).toMatchObject<CreatableTask>({
 			content: "_No_Task_Name_Provided_",
 		});
 	});
 
 	test("Create Normal Task", () => {
-		expect(generalExpectedTask).toMatchObject<ClientCreatedTask>({
+		expect(generalExpectedTask).toMatchObject<CreatableTask>({
 			content: "Hello world",
 		});
 	});

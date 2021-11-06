@@ -1,7 +1,7 @@
 import { AxiosResponse } from "axios";
 
 export interface SectionModule {
-	create: (section?: CreatableSection) => Promise<APISectionObject>;
+	create: (section: CreatableSection) => Promise<APISectionObject>;
 	get: (id: string | number) => Promise<APISectionObject>;
 	getAllJSON: (project_id?: number) => Promise<APISectionObject[]>;
 	getAll: (project_id?: number) => Promise<string[]>;

@@ -1,5 +1,5 @@
 import TDSClient, { Project } from "..";
-import { ClientCreatedProject } from "../definitions";
+import { CreatableProject } from "../definitions";
 
 const myClient = TDSClient(process.env.TODOIST_TOKEN);
 
@@ -11,13 +11,13 @@ let generalExpectedProjectID: number;
 describe("Client-Side Project Creation", () => {
 	test("Create Empty Project", () => {
 		const emptyProject = Project();
-		expect(emptyProject).toMatchObject<ClientCreatedProject>({
+		expect(emptyProject).toMatchObject<CreatableProject>({
 			name: "_No_Project_Name_Provided_",
 		});
 	});
 
 	test("Create Normal Project", () => {
-		expect(generalExpectedProject).toMatchObject<ClientCreatedProject>({
+		expect(generalExpectedProject).toMatchObject<CreatableProject>({
 			name: "P1",
 		});
 	});

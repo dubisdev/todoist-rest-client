@@ -1,6 +1,6 @@
-import { ClientCreatedTask, UserCreatedTask } from "../definitions";
+import { CreatableTask, UserCreatedTask } from "../definitions";
 
-const Task = (task: UserCreatedTask = {}): ClientCreatedTask => {
+const Task = (task: UserCreatedTask = {}): CreatableTask => {
 	const { content = "_No_Task_Name_Provided_", ...restOfProperties } = task;
 
 	return {

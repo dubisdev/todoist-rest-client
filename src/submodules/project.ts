@@ -1,38 +1,31 @@
-import Project from "../resources/Project";
 import axios from "axios";
 import { AuthHeader, ProjectCollaborator } from "../definitions";
-import {
-	APIProjectObject,
-	ProjectModule,
-	UserCreatedProject,
-} from "../definitions";
+import { APIProjectObject, ProjectModule } from "../definitions";
 
 const projectClientModule = (headers: AuthHeader): ProjectModule => {
 	async function getOneJSON(id: number | string, headers: AuthHeader) {
-		return await axios
-			.get(`https://api.todoist.com/rest/v1/projects/${id}`, {
-				headers,
-			})
-			.then((res) => res.data as APIProjectObject);
+		let { data } = await axios.get(
+			`https://api.todoist.com/rest/v1/projects/${id}`,
+			{ headers }
+		);
+		return data as APIProjectObject;
 	}
 
 	async function getAllJSON(headers: AuthHeader) {
-		return await axios
-			.get(`https://api.todoist.com/rest/v1/projects`, {
-				headers,
-			})
-			.then((res) => res.data as APIProjectObject[]);
+		let { data } = await axios.get(`https://api.todoist.com/rest/v1/projects`, {
+			headers,
+		});
+		return data as APIProjectObject[];
 	}
 
 	return {
 		create: async (project) => {
-			if (!(<UserCreatedProject>project?.name)) project = Project(project);
-
-			return await axios
-				.post(`https://api.todoist.com/rest/v1/projects`, project, {
-					headers,
-				})
-				.then((res) => res.data as APIProjectObject);
+			let { data } = await axios.post(
+				`https://api.todoist.com/rest/v1/projects`,
+				project,
+				{ headers }
+			);
+			return data as APIProjectObject;
 		},
 
 		getAll: async () => {
@@ -54,9 +47,7 @@ const projectClientModule = (headers: AuthHeader): ProjectModule => {
 		getCollaborators: async (id) => {
 			const { data } = await axios.get(
 				`https://api.todoist.com/rest/v1/projects/${id}/collaborators`,
-				{
-					headers,
-				}
+				{ headers }
 			);
 			return data as ProjectCollaborator[];
 		},
@@ -64,9 +55,7 @@ const projectClientModule = (headers: AuthHeader): ProjectModule => {
 		delete: async (id) => {
 			return await axios.delete(
 				`https://api.todoist.com/rest/v1/projects/${id}`,
-				{
-					headers,
-				}
+				{ headers }
 			);
 		},
 
@@ -74,9 +63,7 @@ const projectClientModule = (headers: AuthHeader): ProjectModule => {
 			return await axios.post(
 				`https://api.todoist.com/rest/v1/projects/${id}`,
 				project,
-				{
-					headers,
-				}
+				{ headers }
 			);
 		},
 	};

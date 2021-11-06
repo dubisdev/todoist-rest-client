@@ -1,9 +1,7 @@
 import { AxiosResponse } from "axios";
 
 export interface TaskModule {
-	create: (
-		task?: UserCreatedTask | ClientCreatedTask
-	) => Promise<APITaskObject>;
+	create: (task: CreatableTask) => Promise<APITaskObject>;
 	closeTask: (id: number | string) => Promise<AxiosResponse>;
 	getAll: () => Promise<string[]>;
 	getAllJSON: (params?: TaskSearchableParams) => Promise<APITaskObject[]>;
@@ -37,7 +35,7 @@ export interface UserCreatedTask {
 	assignee?: number;
 }
 
-export interface ClientCreatedTask extends UserCreatedTask {
+export interface CreatableTask extends UserCreatedTask {
 	content: string;
 }
 

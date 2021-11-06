@@ -1,6 +1,6 @@
-import { ClientCreatedProject, UserCreatedProject } from "../definitions";
+import { CreatableProject, UserCreatedProject } from "../definitions";
 
-const Project = (project: UserCreatedProject = {}): ClientCreatedProject => {
+const Project = (project: UserCreatedProject = {}): CreatableProject => {
 	const { name = "_No_Project_Name_Provided_", ...restOfProperties } = project;
 
 	return {
