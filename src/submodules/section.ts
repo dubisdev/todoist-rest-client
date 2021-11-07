@@ -11,12 +11,10 @@ const sectionClientModule = (headers: AuthHeader): SectionModule => {
 	};
 
 	const getAllJSON = async (project_id?: number) => {
-		let { data } = await axios.get(
-			`https://api.todoist.com/rest/v1/sections${
-				project_id ? `?project_id=${project_id}` : ""
-			}`,
-			{ headers }
-		);
+		let { data } = await axios.get(`https://api.todoist.com/rest/v1/sections`, {
+			headers,
+			params: { project_id },
+		});
 
 		return data as APISectionObject[];
 	};

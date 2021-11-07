@@ -8,7 +8,7 @@ import {
 import moment from "moment";
 
 const taskClientModule = (headers: AuthHeader): TaskModule => {
-	async function getOneJSON(id: number | string, headers: AuthHeader) {
+	async function getOneJSON(id: number | string) {
 		let { data } = await axios.get(
 			`https://api.todoist.com/rest/v1/tasks/${id}`,
 			{ headers }
@@ -16,10 +16,7 @@ const taskClientModule = (headers: AuthHeader): TaskModule => {
 		return data as APITaskObject;
 	}
 
-	async function getAllJSON(
-		headers: AuthHeader,
-		params?: TaskSearchableParams
-	) {
+	async function getAllJSON(params?: TaskSearchableParams) {
 		let { data } = await axios.get(`https://api.todoist.com/rest/v1/tasks`, {
 			headers,
 			params,
@@ -59,18 +56,18 @@ const taskClientModule = (headers: AuthHeader): TaskModule => {
 		},
 
 		getAll: async () => {
-			let json = await getAllJSON(headers);
+			let json = await getAllJSON();
 			let arrayTasks: string[] = [];
-			json.map((task) => {
+			json.forEach((task) => {
 				arrayTasks.push(task.content);
 			});
 			return arrayTasks;
 		},
 
-		getAllJSON: async (params?) => await getAllJSON(headers, params),
+		getAllJSON,
 
 		getToday: async () => {
-			let json = await getAllJSON(headers);
+			let json = await getAllJSON();
 			let arrayTasks: string[] = [];
 
 			let todayTasksJson = json
@@ -87,7 +84,7 @@ const taskClientModule = (headers: AuthHeader): TaskModule => {
 		},
 
 		getTodayJSON: async () => {
-			let json = await getAllJSON(headers);
+			let json = await getAllJSON();
 
 			let todayTasksJson = json
 				.filter((task) => task.due !== undefined)
@@ -100,9 +97,7 @@ const taskClientModule = (headers: AuthHeader): TaskModule => {
 			return todayTasksJson;
 		},
 
-		get: async (id) => {
-			return await getOneJSON(id, headers);
-		},
+		get: getOneJSON,
 
 		closeTask: async (id) => {
 			return await axios.post(
@@ -112,7 +107,7 @@ const taskClientModule = (headers: AuthHeader): TaskModule => {
 			);
 		},
 
-		search: async (params) => await getAllJSON(headers, params),
+		search: getAllJSON,
 	};
 };
 

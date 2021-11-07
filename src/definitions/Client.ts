@@ -1,4 +1,10 @@
-import { TaskModule, ProjectModule, SectionModule, LabelModule } from ".";
+import {
+	TaskModule,
+	ProjectModule,
+	SectionModule,
+	LabelModule,
+	CommentModule,
+} from ".";
 import { AxiosRequestHeaders } from "axios";
 
 export interface AuthHeader extends AxiosRequestHeaders {
@@ -11,6 +17,7 @@ export interface TDSClient {
 	project: ProjectModule;
 	section: SectionModule;
 	label: LabelModule;
+	comment: CommentModule;
 }
 
 export interface ClientConstructor {
