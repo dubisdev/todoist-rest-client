@@ -4,6 +4,7 @@ import {
 	SectionModule,
 	LabelModule,
 	CommentModule,
+	ExtrasModule,
 } from ".";
 import { AxiosRequestHeaders } from "axios";
 
@@ -18,6 +19,7 @@ export interface TDSClient {
 	section: SectionModule;
 	label: LabelModule;
 	comment: CommentModule;
+	extras: ExtrasModule;
 }
 
 export interface ClientConstructor {
