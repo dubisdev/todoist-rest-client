@@ -1,7 +1,8 @@
 # JS TODOIST-REST-CLIENT [![codecov](https://codecov.io/gh/dubisdev/todoist-rest-client/branch/master/graph/badge.svg?token=SDKUMHUC6Y)](https://codecov.io/gh/dubisdev/todoist-rest-client)
 
-| _A simple todoist-rest-api client_
-| ⚠️ This client is not official and is not linked to [Doist](https://github.com/Doist).
+> _A simple todoist-rest-api client_
+
+> ⚠️ This client is not official and is not linked to [Doist](https://github.com/Doist).
 
 ## Implemented Features
 
