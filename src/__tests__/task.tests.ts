@@ -78,36 +78,29 @@ describe("API Tasks Functions", () => {
 
 	// no active tasks now
 	test("Create Two Tasks", async () => {
-		await myClient.task.create({ content: "First task" });
-		await myClient.task.create({ content: "Second task" });
+		await Promise.all([
+			myClient.task.create({ content: "First task" }),
+			myClient.task.create({ content: "Second task" }),
+		]);
 	});
 
 	test("Get All Active Tasks JSON", async () => {
 		const responseTasks = await myClient.task.getAllJSON();
-		const firstTaskExists = responseTasks.some(
-			(taskObj) => taskObj.content === "First task"
-		);
-		const secondTaskExists = responseTasks.some(
+
+		const taskExists = responseTasks.some(
 			(taskObj) => taskObj.content === "Second task"
 		);
 
 		expect(responseTasks.length).toBe(2);
-
-		expect(firstTaskExists).toBe(true);
-		expect(secondTaskExists).toBe(true);
+		expect(taskExists).toBe(true);
 	});
 
 	test("Get All Active Tasks Names", async () => {
 		const responseTasks = await myClient.task.getAll();
-		const firstTaskExists = responseTasks.some((name) => name === "First task");
-		const secondTaskExists = responseTasks.some(
-			(name) => name === "Second task"
-		);
+		const taskExists = responseTasks.some((name) => name === "Second task");
 
 		expect(responseTasks.length).toBe(2);
-
-		expect(firstTaskExists).toBe(true);
-		expect(secondTaskExists).toBe(true);
+		expect(taskExists).toBe(true);
 	});
 
 	test("Delete All Previous Tasks", async () => {
@@ -116,7 +109,7 @@ describe("API Tasks Functions", () => {
 			allTasksJSON.map((task) => myClient.task.delete(task.id))
 		);
 
-		responses.map(({ status }) => expect(status).toBe(204));
+		responses.forEach(({ status }) => expect(status).toBe(204));
 	});
 
 	// no active tasks now
@@ -134,15 +127,16 @@ describe("API Tasks Functions", () => {
 		]);
 
 		//get created tasks
-		let allTodayJSON = await myClient.task.getTodayJSON();
-		let allTodayNames = await myClient.task.getToday();
+		let allTodayJSON, allTodayNames;
+
+		await Promise.all([
+			(allTodayJSON = await myClient.task.getTodayJSON()),
+			(allTodayNames = await myClient.task.getToday()),
+		]);
 
 		const firstTaskExists =
 			allTodayJSON.some((taskObj) => taskObj.content === "First task") &&
 			allTodayNames.some((name) => name === "First task");
-		const secondTaskExists = allTodayJSON.some(
-			(taskObj) => taskObj.content === "Second task"
-		);
 
 		let normalDate = new Date().toISOString().substring(0, 10);
 		let momentDate = moment.parseZone(new Date()).format().substring(0, 10);
@@ -152,12 +146,10 @@ describe("API Tasks Functions", () => {
 			expect(allTodayJSON.length).toBe(2);
 			expect(typeof allTodayJSON[0]).toBe("object");
 			expect(firstTaskExists).toBe(true);
-			expect(secondTaskExists).toBe(true);
 		} else {
 			// GMT day != local day (offset influence in day)
 			expect(allTodayJSON.length).toBe(0);
 			expect(firstTaskExists).toBe(false);
-			expect(secondTaskExists).toBe(false);
 		}
 	});
 
@@ -168,18 +160,13 @@ describe("API Tasks Functions", () => {
 			filter: "(hoy | vencidas)",
 		});
 
-		const firstTaskExists = searchedTasks.some(
+		const taskExists = searchedTasks.some(
 			(taskObj) => taskObj.content === "First task"
-		);
-		const secondTaskExists = searchedTasks.some(
-			(taskObj) => taskObj.content === "Second task"
 		);
 
 		// GMT day = local day
 		expect(searchedTasks.length).toBe(2);
-		expect(typeof searchedTasks[0]).toBe("object");
-		expect(firstTaskExists).toBe(true);
-		expect(secondTaskExists).toBe(true);
+		expect(taskExists).toBe(true);
 	});
 });
 

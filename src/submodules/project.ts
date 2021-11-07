@@ -31,7 +31,7 @@ const projectClientModule = (headers: AuthHeader): ProjectModule => {
 		getAll: async () => {
 			let json = await getAllJSON(headers);
 			let arrayProjects: string[] = [];
-			json.map((project) => {
+			json.forEach((project) => {
 				arrayProjects.push(project.name);
 			});
 			return arrayProjects;

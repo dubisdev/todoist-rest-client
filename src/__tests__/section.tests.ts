@@ -69,43 +69,21 @@ describe("API Section Functions", () => {
 	});
 
 	test("Get All Sections", async () => {
-		const responseSections = await myClient.section.getAllJSON();
-		const firstSectionExists = responseSections.some(
-			(sectionObj) => sectionObj.name === "Test Section"
-		);
-		const secondSectionExists = responseSections.some(
+		const responseSections = await myClient.section.getAllJSON(inboxProjectID);
+		const sectionExists = responseSections.some(
 			(sectionObj) => sectionObj.name === "Section 2"
-		);
-		const thirdSectionExists = responseSections.some(
-			(sectionObj) => sectionObj.name === "Section 3"
 		);
 
 		expect(responseSections.length).toBe(3);
-		expect(typeof responseSections[0]).toBe("object");
-
-		expect(firstSectionExists).toBe(true);
-		expect(secondSectionExists).toBe(true);
-		expect(thirdSectionExists).toBe(true);
+		expect(sectionExists).toBe(true);
 	});
 
 	test("Get All Section Names", async () => {
 		const responseSections = await myClient.section.getAll();
-		const firstSectionExists = responseSections.some(
-			(name) => name === "Test Section"
-		);
-		const secondSectionExists = responseSections.some(
-			(name) => name === "Section 2"
-		);
-		const thirdSectiontExists = responseSections.some(
-			(name) => name === "Section 3"
-		);
+		const sectionExists = responseSections.some((name) => name === "Section 2");
 
 		expect(responseSections.length).toBe(3);
-		expect(typeof responseSections[0]).toBe("string");
-
-		expect(firstSectionExists).toBe(true);
-		expect(secondSectionExists).toBe(true);
-		expect(thirdSectiontExists).toBe(true);
+		expect(sectionExists).toBe(true);
 	});
 
 	test("Get Sections from Project (Inbox)", async () => {
@@ -137,6 +115,6 @@ describe("API Section Functions", () => {
 			)
 		);
 
-		responses.map(({ status }) => expect(status).toBe(204));
+		responses.forEach(({ status }) => expect(status).toBe(204));
 	});
 });

@@ -53,36 +53,21 @@ describe("API Project Functions", () => {
 	// 4 active projects now
 	test("Get All Active Projects JSON", async () => {
 		const responseProjects = await myClient.project.getAllJSON();
-		const firstProjectExists = responseProjects.some(
-			(projectObj) => projectObj.name === "P1"
-		);
-		const secondProjectExists = responseProjects.some(
+
+		const projectExists = responseProjects.some(
 			(projectObj) => projectObj.name === "P2"
-		);
-		const thirdProjectExists = responseProjects.some(
-			(projectObj) => projectObj.name === "P3"
 		);
 
 		expect(responseProjects.length).toBe(4);
-		expect(typeof responseProjects[0]).toBe("object");
-
-		expect(firstProjectExists).toBe(true);
-		expect(secondProjectExists).toBe(true);
-		expect(thirdProjectExists).toBe(true);
+		expect(projectExists).toBe(true);
 	});
 
 	test("Get All Active Project Names", async () => {
 		const responseProjects = await myClient.project.getAll();
-		const firstProjectExists = responseProjects.some((name) => name === "P1");
-		const secondProjectExists = responseProjects.some((name) => name === "P2");
-		const thirdProjectExists = responseProjects.some((name) => name === "P3");
+		const projectExists = responseProjects.some((name) => name === "P2");
 
 		expect(responseProjects.length).toBe(4);
-		expect(typeof responseProjects[0]).toBe("string");
-
-		expect(firstProjectExists).toBe(true);
-		expect(secondProjectExists).toBe(true);
-		expect(thirdProjectExists).toBe(true);
+		expect(projectExists).toBe(true);
 	});
 
 	test("Update a project", async () => {
@@ -111,6 +96,6 @@ describe("API Project Functions", () => {
 			})
 		);
 
-		responses.map(({ status }) => expect(status).toBe(204));
+		responses.forEach(({ status }) => expect(status).toBe(204));
 	});
 });
