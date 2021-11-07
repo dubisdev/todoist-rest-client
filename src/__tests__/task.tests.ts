@@ -58,7 +58,7 @@ describe("API Tasks Functions", () => {
 	});
 
 	test("Close A Task", async () => {
-		let status = (await myClient.task.closeTask(generalExpectedTaskID)).status;
+		let status = (await myClient.task.close(generalExpectedTaskID)).status;
 
 		expect(status).toBe(204);
 	});

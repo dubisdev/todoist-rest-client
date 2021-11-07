@@ -2,7 +2,7 @@ import { AxiosResponse } from "axios";
 
 export interface TaskModule {
 	create: (task: CreatableTask) => Promise<APITaskObject>;
-	closeTask: (id: number | string) => Promise<AxiosResponse>;
+	close: (id: number | string) => Promise<AxiosResponse>;
 	getAll: () => Promise<string[]>;
 	getAllJSON: (params?: TaskSearchableParams) => Promise<APITaskObject[]>;
 	getToday: () => Promise<string[]>;

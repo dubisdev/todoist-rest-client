@@ -99,7 +99,7 @@ const taskClientModule = (headers: AuthHeader): TaskModule => {
 
 		get: getOneJSON,
 
-		closeTask: async (id) => {
+		close: async (id) => {
 			return await axios.post(
 				`https://api.todoist.com/rest/v1/tasks/${id}/close`,
 				{},
