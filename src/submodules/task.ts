@@ -1,42 +1,27 @@
 import { APITaskObject, AuthHeader, TaskModule } from "../definitions";
-import { get, post, del } from "../services/apiRequests";
+import { get, post, del } from "../libs/apiRequests";
+import { TASKS_URL } from "../libs/constants";
 
 const taskClientModule = (headers: AuthHeader): TaskModule => {
 	return {
 		create: async (task) => {
-			let { data } = await post(`https://api.todoist.com/rest/v1/tasks`, task, {
-				headers,
-			});
+			let { data } = await post(`${TASKS_URL}`, task, { headers });
 			return data as APITaskObject;
 		},
 
-		update: async (id, task) =>
-			post(`https://api.todoist.com/rest/v1/tasks/${id}`, task, { headers }),
+		update: async (id, task) => post(`${TASKS_URL}/${id}`, task, { headers }),
 
-		reopen: async (id) =>
-			post(
-				`https://api.todoist.com/rest/v1/tasks/${id}/reopen`,
-				{},
-				{ headers }
-			),
+		reopen: async (id) => post(`${TASKS_URL}/${id}/reopen`, {}, { headers }),
 
-		delete: async (id) =>
-			del(`https://api.todoist.com/rest/v1/tasks/${id}`, { headers }),
+		delete: async (id) => del(`${TASKS_URL}/${id}`, { headers }),
 
-		getAll: () => get(`https://api.todoist.com/rest/v1/tasks`, { headers }),
+		getAll: () => get(`${TASKS_URL}`, { headers }),
 
-		get: (id) =>
-			get(`https://api.todoist.com/rest/v1/tasks/${id}`, { headers }),
+		get: (id) => get(`${TASKS_URL}/${id}`, { headers }),
 
-		close: async (id) =>
-			post(
-				`https://api.todoist.com/rest/v1/tasks/${id}/close`,
-				{},
-				{ headers }
-			),
+		close: async (id) => post(`${TASKS_URL}/${id}/close`, {}, { headers }),
 
-		search: (params) =>
-			get(`https://api.todoist.com/rest/v1/tasks`, { headers, params }),
+		search: (params) => get(`${TASKS_URL}`, { headers, params }),
 	};
 };
 

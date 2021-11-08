@@ -1,45 +1,25 @@
-import {
-	AuthHeader,
-	ProjectCollaborator,
-	APIProjectObject,
-	ProjectModule,
-} from "../definitions";
-import { get, del, post } from "../services/apiRequests";
+import { AuthHeader, APIProjectObject, ProjectModule } from "../definitions";
+import { get, del, post } from "../libs/apiRequests";
+import { PROJECTS_URL } from "../libs/constants";
 
 const projectClientModule = (headers: AuthHeader): ProjectModule => {
 	return {
 		create: async (project) => {
-			let { data } = await post(
-				`https://api.todoist.com/rest/v1/projects`,
-				project,
-				{ headers }
-			);
+			let { data } = await post(`${PROJECTS_URL}`, project, { headers });
 			return data as APIProjectObject;
 		},
 
-		getAll: () =>
-			get<APIProjectObject[]>(`https://api.todoist.com/rest/v1/projects`, {
-				headers,
-			}),
+		getAll: () => get(`${PROJECTS_URL}`, { headers }),
 
-		get: async (id) =>
-			get<APIProjectObject>(`https://api.todoist.com/rest/v1/projects/${id}`, {
-				headers,
-			}),
+		get: (id) => get(`${PROJECTS_URL}/${id}`, { headers }),
 
-		getCollaborators: async (id) =>
-			get<ProjectCollaborator[]>(
-				`https://api.todoist.com/rest/v1/projects/${id}/collaborators`,
-				{ headers }
-			),
+		getCollaborators: (id) =>
+			get(`${PROJECTS_URL}/${id}/collaborators`, { headers }),
 
-		delete: async (id) =>
-			del(`https://api.todoist.com/rest/v1/projects/${id}`, { headers }),
+		delete: async (id) => del(`${PROJECTS_URL}/${id}`, { headers }),
 
 		update: async (id, project) =>
-			post(`https://api.todoist.com/rest/v1/projects/${id}`, project, {
-				headers,
-			}),
+			post(`${PROJECTS_URL}/${id}`, project, { headers }),
 	};
 };
 export default projectClientModule;

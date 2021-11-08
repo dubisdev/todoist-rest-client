@@ -1,27 +1,21 @@
 import { AuthHeader, APILabelObject, LabelModule } from "../definitions";
-import { get, del, post } from "../services/apiRequests";
+import { get, del, post } from "../libs/apiRequests";
+import { LABELS_URL } from "../libs/constants";
 
 const labelClientModule = (headers: AuthHeader): LabelModule => {
 	return {
 		create: async (label) => {
-			let { data } = await post(
-				`https://api.todoist.com/rest/v1/labels`,
-				label,
-				{ headers }
-			);
+			let { data } = await post(`${LABELS_URL}`, label, { headers });
 			return data as APILabelObject;
 		},
 
-		getAll: () => get(`https://api.todoist.com/rest/v1/labels`, { headers }),
+		getAll: () => get(`${LABELS_URL}`, { headers }),
 
-		get: (id) =>
-			get(`https://api.todoist.com/rest/v1/labels/${id}`, { headers }),
+		get: (id) => get(`${LABELS_URL}/${id}`, { headers }),
 
-		delete: (id) =>
-			del(`https://api.todoist.com/rest/v1/labels/${id}`, { headers }),
+		delete: (id) => del(`${LABELS_URL}/${id}`, { headers }),
 
-		update: (id, label) =>
-			post(`https://api.todoist.com/rest/v1/labels/${id}`, label, { headers }),
+		update: (id, label) => post(`${LABELS_URL}/${id}`, label, { headers }),
 	};
 };
 export default labelClientModule;

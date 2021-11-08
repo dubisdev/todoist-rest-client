@@ -1,30 +1,22 @@
 import { AuthHeader, APICommentObject, CommentModule } from "../definitions";
-import { get, del, post } from "../services/apiRequests";
+import { get, del, post } from "../libs/apiRequests";
+import { COMMENTS_URL } from "../libs/constants";
 
 const commentClientModule = (headers: AuthHeader): CommentModule => {
 	return {
 		create: async (comment) => {
-			let { data } = await post(
-				`https://api.todoist.com/rest/v1/comments`,
-				comment,
-				{ headers }
-			);
+			let { data } = await post(`${COMMENTS_URL}`, comment, { headers });
 			return data as APICommentObject;
 		},
 
-		getAll: (params) =>
-			get(`https://api.todoist.com/rest/v1/comments`, { headers, params }),
+		getAll: (params) => get(`${COMMENTS_URL}`, { headers, params }),
 
-		get: (id) =>
-			get(`https://api.todoist.com/rest/v1/comments/${id}`, { headers }),
+		get: (id) => get(`${COMMENTS_URL}/${id}`, { headers }),
 
-		delete: async (id) =>
-			del(`https://api.todoist.com/rest/v1/comments/${id}`, { headers }),
+		delete: async (id) => del(`${COMMENTS_URL}/${id}`, { headers }),
 
 		update: (id, comment) =>
-			post(`https://api.todoist.com/rest/v1/comments/${id}`, comment, {
-				headers,
-			}),
+			post(`${COMMENTS_URL}/${id}`, comment, { headers }),
 	};
 };
 export default commentClientModule;

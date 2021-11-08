@@ -6,15 +6,13 @@ import {
 	APISectionObject,
 } from "../definitions";
 import moment from "moment";
-import { get } from "../services/apiRequests";
+import { get } from "../libs/apiRequests";
+import { LABELS_URL, PROJECTS_URL, TASKS_URL } from "../libs/constants";
 
 const extrasClientModule = (headers: AuthHeader): ExtrasModule => {
 	return {
 		getAllTaskNames: async () => {
-			let json = await get<APITaskObject[]>(
-				"https://api.todoist.com/rest/v1/tasks",
-				{ headers }
-			);
+			let json = await get<APITaskObject[]>(`${TASKS_URL}`, { headers });
 			let arrayTasks: string[] = [];
 			json.forEach((task) => {
 				arrayTasks.push(task.content);
@@ -23,10 +21,7 @@ const extrasClientModule = (headers: AuthHeader): ExtrasModule => {
 		},
 
 		getTodayTaskNames: async () => {
-			let json = await get<APITaskObject[]>(
-				"https://api.todoist.com/rest/v1/tasks",
-				{ headers }
-			);
+			let json = await get<APITaskObject[]>(`${TASKS_URL}`, { headers });
 			let arrayTasks: string[] = [];
 
 			let todayTasksJson = json
@@ -43,10 +38,7 @@ const extrasClientModule = (headers: AuthHeader): ExtrasModule => {
 		},
 
 		getTodayTaskJSON: async () => {
-			let json = await get<APITaskObject[]>(
-				"https://api.todoist.com/rest/v1/tasks",
-				{ headers }
-			);
+			let json = await get<APITaskObject[]>(`${TASKS_URL}`, { headers });
 
 			let todayTasksJson = json
 				.filter((task) => task.due !== undefined)
@@ -60,10 +52,7 @@ const extrasClientModule = (headers: AuthHeader): ExtrasModule => {
 		},
 
 		getAllProjectNames: async () => {
-			let json = await get<APIProjectObject[]>(
-				"https://api.todoist.com/rest/v1/projects",
-				{ headers }
-			);
+			let json = await get<APIProjectObject[]>(`${PROJECTS_URL}`, { headers });
 			let arrayProjects: string[] = [];
 			json.forEach((project) => {
 				arrayProjects.push(project.name);
@@ -72,20 +61,17 @@ const extrasClientModule = (headers: AuthHeader): ExtrasModule => {
 		},
 
 		getAllSectionNames: async (project_id?) => {
-			let json = await get<APISectionObject[]>(
-				"https://api.todoist.com/rest/v1/projects",
-				{ headers, params: project_id }
-			);
+			let json = await get<APISectionObject[]>(`${PROJECTS_URL}`, {
+				headers,
+				params: project_id,
+			});
 			let arraySections: string[] = [];
 			json.forEach((section) => arraySections.push(section.name));
 			return arraySections;
 		},
 
 		getAllLabelNames: async () => {
-			let json = await get<APISectionObject[]>(
-				"https://api.todoist.com/rest/v1/labels",
-				{ headers }
-			);
+			let json = await get<APISectionObject[]>(`${LABELS_URL}`, { headers });
 			let arrayLabels: string[] = [];
 			json.forEach((label) => arrayLabels.push(label.name));
 			return arrayLabels;

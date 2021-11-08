@@ -1,35 +1,23 @@
 import { AuthHeader, APISectionObject, SectionModule } from "../definitions";
-import { get, post, del } from "../services/apiRequests";
+import { get, post, del } from "../libs/apiRequests";
+import { SECTIONS_URL } from "../libs/constants";
 
 const sectionClientModule = (headers: AuthHeader): SectionModule => {
 	return {
 		create: async (section) => {
-			let { data } = await post(
-				`https://api.todoist.com/rest/v1/sections`,
-				section,
-				{ headers }
-			);
+			let { data } = await post(`${SECTIONS_URL}`, section, { headers });
 			return data as APISectionObject;
 		},
 
 		getAll: (project_id) =>
-			get<APISectionObject[]>(`https://api.todoist.com/rest/v1/sections`, {
-				headers,
-				params: { project_id },
-			}),
+			get(`${SECTIONS_URL}`, { headers, params: { project_id } }),
 
-		get: async (id) =>
-			get<APISectionObject>(`https://api.todoist.com/rest/v1/sections/${id}`, {
-				headers,
-			}),
+		get: (id) => get(`${SECTIONS_URL}/${id}`, { headers }),
 
-		delete: async (id) =>
-			del(`https://api.todoist.com/rest/v1/sections/${id}`, { headers }),
+		delete: (id) => del(`${SECTIONS_URL}/${id}`, { headers }),
 
-		update: async (id, section) =>
-			post(`https://api.todoist.com/rest/v1/sections/${id}`, section, {
-				headers,
-			}),
+		update: (id, section) =>
+			post(`${SECTIONS_URL}/${id}`, section, { headers }),
 	};
 };
 export default sectionClientModule;
