@@ -77,6 +77,16 @@ describe("API Section Functions", () => {
 		expect(sectionExists).toBe(true);
 	});
 
+	test("Get All Section Names", async () => {
+		const responseSections = await myClient.extras.getAllSectionNames(
+			inboxProjectID
+		);
+		const sectionExists = responseSections.some((name) => name === "Section 2");
+
+		expect(responseSections.length).toBe(3);
+		expect(sectionExists).toBe(true);
+	});
+
 	test("Get Sections from Project (Inbox)", async () => {
 		const responseSections = await myClient.section.getAll(inboxProjectID);
 		const testSectionExists = responseSections.some(

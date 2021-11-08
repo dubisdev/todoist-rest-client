@@ -1,6 +1,8 @@
+/* istanbul ignore file */
+
 import axios from "axios";
 
-export const get = async <T>(url: string, config: object): Promise<T> => {
+export const get = async <T>(url: string, config?: object): Promise<T> => {
 	let { data } = await axios.get<T>(url, config);
 	return data;
 };

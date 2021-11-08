@@ -53,6 +53,16 @@ describe("API Label Functions", () => {
 		expect(testLabelExists).toBe(true);
 	});
 
+	test("Get All Label Names", async () => {
+		const responseLabels = await myClient.extras.getAllLabelNames();
+		const testLabelExists = responseLabels.some(
+			(name) => name === "Test_Label"
+		);
+
+		expect(responseLabels.length).toBe(3);
+		expect(testLabelExists).toBe(true);
+	});
+
 	test("Update a label", async () => {
 		const repsonse = await myClient.label.update(labelID, {
 			name: "New label name",

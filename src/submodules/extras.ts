@@ -7,7 +7,12 @@ import {
 } from "../definitions";
 import moment from "moment";
 import { get } from "../libs/apiRequests";
-import { LABELS_URL, PROJECTS_URL, TASKS_URL } from "../libs/constants";
+import {
+	LABELS_URL,
+	PROJECTS_URL,
+	SECTIONS_URL,
+	TASKS_URL,
+} from "../libs/constants";
 
 const extrasClientModule = (headers: AuthHeader): ExtrasModule => {
 	return {
@@ -61,7 +66,7 @@ const extrasClientModule = (headers: AuthHeader): ExtrasModule => {
 		},
 
 		getAllSectionNames: async (project_id?) => {
-			let json = await get<APISectionObject[]>(`${PROJECTS_URL}`, {
+			let json = await get<APISectionObject[]>(`${SECTIONS_URL}`, {
 				headers,
 				params: project_id,
 			});
