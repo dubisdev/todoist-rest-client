@@ -5,7 +5,7 @@ export interface CommentModule {
 
 	create: (comment: CreatableComment) => Promise<APICommentObject>;
 	delete: (id: number | string) => Promise<AxiosResponse>;
-	getAllJSON: (params: CommentSearchableParams) => Promise<APICommentObject[]>;
+	getAll: (params: CommentSearchableParams) => Promise<APICommentObject[]>;
 
 	update: (
 		id: number | string,

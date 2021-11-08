@@ -5,7 +5,7 @@ import moment from "moment";
 const myClient = TDSClient(process.env.TODOIST_TOKEN);
 
 beforeAll(async () => {
-	let allTasksJSON = await myClient.task.getAllJSON();
+	let allTasksJSON = await myClient.task.getAll();
 	await Promise.all(allTasksJSON.map((task) => myClient.task.delete(task.id)));
 	console.log("Init: Deleted all tasks!");
 });
@@ -85,7 +85,7 @@ describe("API Tasks Functions", () => {
 	});
 
 	test("Get All Active Tasks JSON", async () => {
-		const responseTasks = await myClient.task.getAllJSON();
+		const responseTasks = await myClient.task.getAll();
 
 		const taskExists = responseTasks.some(
 			(taskObj) => taskObj.content === "Second task"
@@ -95,16 +95,8 @@ describe("API Tasks Functions", () => {
 		expect(taskExists).toBe(true);
 	});
 
-	test("Get All Active Tasks Names", async () => {
-		const responseTasks = await myClient.task.getAll();
-		const taskExists = responseTasks.some((name) => name === "Second task");
-
-		expect(responseTasks.length).toBe(2);
-		expect(taskExists).toBe(true);
-	});
-
 	test("Delete All Previous Tasks", async () => {
-		let allTasksJSON = await myClient.task.getAllJSON();
+		let allTasksJSON = await myClient.task.getAll();
 		let responses = await Promise.all(
 			allTasksJSON.map((task) => myClient.task.delete(task.id))
 		);
@@ -130,8 +122,8 @@ describe("API Tasks Functions", () => {
 		let allTodayJSON, allTodayNames;
 
 		await Promise.all([
-			(allTodayJSON = await myClient.task.getTodayJSON()),
-			(allTodayNames = await myClient.task.getToday()),
+			(allTodayJSON = await myClient.extras.getTodayTaskJSON()),
+			(allTodayNames = await myClient.extras.getTodayTaskNames()),
 		]);
 
 		const firstTaskExists =
@@ -153,6 +145,12 @@ describe("API Tasks Functions", () => {
 		}
 	});
 
+	test("Test getAllTaskNames", async () => {
+		let names = await myClient.extras.getAllTaskNames();
+
+		expect(typeof names[0]).toEqual("string");
+	});
+
 	test("Search Tasks", async () => {
 		//search tasks
 		let searchedTasks = await myClient.task.search({
@@ -171,7 +169,7 @@ describe("API Tasks Functions", () => {
 });
 
 afterAll(async () => {
-	let allTasksJSON = await myClient.task.getAllJSON();
+	let allTasksJSON = await myClient.task.getAll();
 	await Promise.all(allTasksJSON.map((task) => myClient.task.delete(task.id)));
 	console.log("Finish: Deleted all tasks!");
 });

@@ -11,7 +11,7 @@ const projectClientModule = (headers: AuthHeader): ProjectModule => {
 		return data as APIProjectObject;
 	}
 
-	async function getAllJSON(headers: AuthHeader) {
+	async function getAllJSON() {
 		let { data } = await axios.get(`https://api.todoist.com/rest/v1/projects`, {
 			headers,
 		});
@@ -28,16 +28,7 @@ const projectClientModule = (headers: AuthHeader): ProjectModule => {
 			return data as APIProjectObject;
 		},
 
-		getAll: async () => {
-			let json = await getAllJSON(headers);
-			let arrayProjects: string[] = [];
-			json.forEach((project) => {
-				arrayProjects.push(project.name);
-			});
-			return arrayProjects;
-		},
-
-		getAllJSON: async () => await getAllJSON(headers),
+		getAll: getAllJSON,
 
 		get: async (id) => {
 			let project = await getOneJSON(id, headers);

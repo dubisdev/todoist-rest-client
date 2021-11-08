@@ -2,8 +2,7 @@ import { AxiosResponse } from "axios";
 
 export interface ProjectModule {
 	create: (project: CreatableProject) => Promise<APIProjectObject>;
-	getAll: () => Promise<string[]>;
-	getAllJSON: () => Promise<APIProjectObject[]>;
+	getAll: () => Promise<APIProjectObject[]>;
 	get: (id: string | number) => Promise<APIProjectObject>;
 	update: (
 		id: number | string,

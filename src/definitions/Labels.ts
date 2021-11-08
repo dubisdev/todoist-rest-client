@@ -4,8 +4,7 @@ import { ProjectColor } from ".";
 export interface LabelModule {
 	create: (label: CreatableLabel) => Promise<APILabelObject>;
 	delete: (id: number | string) => Promise<AxiosResponse>;
-	getAllJSON: () => Promise<APILabelObject[]>;
-	getAll: () => Promise<string[]>;
+	getAll: () => Promise<APILabelObject[]>;
 	get: (id: string | number) => Promise<APILabelObject>;
 	update: (
 		id: number | string,

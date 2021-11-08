@@ -7,9 +7,8 @@ const myClient = TDSClient(process.env.TODOIST_TOKEN);
 let inboxProjectID: number;
 beforeAll(async () => {
 	inboxProjectID =
-		(await myClient.project.getAllJSON()).find(
-			(project) => project.inbox_project
-		)?.id || 0;
+		(await myClient.project.getAll()).find((project) => project.inbox_project)
+			?.id || 0;
 });
 
 describe("Client-Side Comment Creation", () => {
@@ -65,7 +64,7 @@ describe("API Comment Functions", () => {
 	});
 
 	test("Get All Comments", async () => {
-		const responseComments = await myClient.comment.getAllJSON({
+		const responseComments = await myClient.comment.getAll({
 			project_id: inboxProjectID,
 		});
 		const testCommmentExists = responseComments.some(
@@ -85,7 +84,7 @@ describe("API Comment Functions", () => {
 	});
 
 	test("Delete All Previous Comments", async () => {
-		let allCommentsJSON = await myClient.comment.getAllJSON({
+		let allCommentsJSON = await myClient.comment.getAll({
 			project_id: inboxProjectID,
 		});
 

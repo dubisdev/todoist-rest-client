@@ -34,7 +34,7 @@ const commentClientModule = (headers: AuthHeader): CommentModule => {
 			return data as APICommentObject;
 		},
 
-		getAllJSON,
+		getAll: getAllJSON,
 
 		get: getOneJSON,
 

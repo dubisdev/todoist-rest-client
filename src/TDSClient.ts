@@ -1,4 +1,4 @@
-import { task, project, section, label, comment } from "./submodules";
+import { task, project, section, label, comment, extras } from "./submodules";
 import { ClientConstructor, TDSClient } from "./definitions";
 
 const TDSClientConstructor: ClientConstructor = (apiToken): TDSClient => {
@@ -13,6 +13,7 @@ const TDSClientConstructor: ClientConstructor = (apiToken): TDSClient => {
 		section: section(headers),
 		label: label(headers),
 		comment: comment(headers),
+		extras: extras(headers),
 	};
 };
 

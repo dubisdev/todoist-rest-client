@@ -29,14 +29,7 @@ const sectionClientModule = (headers: AuthHeader): SectionModule => {
 			return data as APISectionObject;
 		},
 
-		getAll: async (project_id?) => {
-			let json = await getAllJSON(project_id);
-			let arraySections: string[] = [];
-			json.forEach((section) => arraySections.push(section.name));
-			return arraySections;
-		},
-
-		getAllJSON: async (project_id?) => await getAllJSON(project_id),
+		getAll: getAllJSON,
 
 		get: async (id) => {
 			let project = await getOneJSON(id);

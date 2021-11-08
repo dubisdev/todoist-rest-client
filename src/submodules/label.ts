@@ -28,14 +28,7 @@ const labelClientModule = (headers: AuthHeader): LabelModule => {
 			return data as APILabelObject;
 		},
 
-		getAll: async () => {
-			let json = await getAllJSON();
-			let arrayLabels: string[] = [];
-			json.forEach((label) => arrayLabels.push(label.name));
-			return arrayLabels;
-		},
-
-		getAllJSON,
+		getAll: getAllJSON,
 
 		get: async (id) => {
 			let project = await getOneJSON(id);
