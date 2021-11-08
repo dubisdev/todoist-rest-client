@@ -1,72 +1,42 @@
-import axios from "axios";
-import {
-	APITaskObject,
-	AuthHeader,
-	TaskModule,
-	TaskSearchableParams,
-} from "../definitions";
+import { APITaskObject, AuthHeader, TaskModule } from "../definitions";
+import { get, post, del } from "../services/apiRequests";
 
 const taskClientModule = (headers: AuthHeader): TaskModule => {
-	async function getOneJSON(id: number | string) {
-		let { data } = await axios.get(
-			`https://api.todoist.com/rest/v1/tasks/${id}`,
-			{ headers }
-		);
-		return data as APITaskObject;
-	}
-
-	async function getAllJSON(params?: TaskSearchableParams) {
-		let { data } = await axios.get(`https://api.todoist.com/rest/v1/tasks`, {
-			headers,
-			params,
-		});
-		return data as APITaskObject[];
-	}
-
 	return {
 		create: async (task) => {
-			let { data } = await axios.post(
-				`https://api.todoist.com/rest/v1/tasks`,
-				task,
-				{ headers }
-			);
+			let { data } = await post(`https://api.todoist.com/rest/v1/tasks`, task, {
+				headers,
+			});
 			return data as APITaskObject;
 		},
 
-		update: async (id, task) => {
-			return await axios.post(
-				`https://api.todoist.com/rest/v1/tasks/${id}`,
-				task,
-				{ headers }
-			);
-		},
+		update: async (id, task) =>
+			post(`https://api.todoist.com/rest/v1/tasks/${id}`, task, { headers }),
 
-		reopen: async (id) => {
-			return await axios.post(
+		reopen: async (id) =>
+			post(
 				`https://api.todoist.com/rest/v1/tasks/${id}/reopen`,
+				{},
 				{ headers }
-			);
-		},
+			),
 
-		delete: async (id) => {
-			return await axios.delete(`https://api.todoist.com/rest/v1/tasks/${id}`, {
-				headers,
-			});
-		},
+		delete: async (id) =>
+			del(`https://api.todoist.com/rest/v1/tasks/${id}`, { headers }),
 
-		getAll: getAllJSON,
+		getAll: () => get(`https://api.todoist.com/rest/v1/tasks`, { headers }),
 
-		get: getOneJSON,
+		get: (id) =>
+			get(`https://api.todoist.com/rest/v1/tasks/${id}`, { headers }),
 
-		close: async (id) => {
-			return await axios.post(
+		close: async (id) =>
+			post(
 				`https://api.todoist.com/rest/v1/tasks/${id}/close`,
 				{},
 				{ headers }
-			);
-		},
+			),
 
-		search: getAllJSON,
+		search: (params) =>
+			get(`https://api.todoist.com/rest/v1/tasks`, { headers, params }),
 	};
 };
 

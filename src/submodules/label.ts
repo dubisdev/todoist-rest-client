@@ -1,26 +1,10 @@
-import axios from "axios";
 import { AuthHeader, APILabelObject, LabelModule } from "../definitions";
+import { get, del, post } from "../services/apiRequests";
 
 const labelClientModule = (headers: AuthHeader): LabelModule => {
-	const getOneJSON = async (id: number | string) => {
-		let { data } = await axios.get(
-			`https://api.todoist.com/rest/v1/labels/${id}`,
-			{ headers }
-		);
-		return data as APILabelObject;
-	};
-
-	const getAllJSON = async () => {
-		let { data } = await axios.get(`https://api.todoist.com/rest/v1/labels`, {
-			headers,
-		});
-
-		return data as APILabelObject[];
-	};
-
 	return {
 		create: async (label) => {
-			let { data } = await axios.post(
+			let { data } = await post(
 				`https://api.todoist.com/rest/v1/labels`,
 				label,
 				{ headers }
@@ -28,27 +12,16 @@ const labelClientModule = (headers: AuthHeader): LabelModule => {
 			return data as APILabelObject;
 		},
 
-		getAll: getAllJSON,
+		getAll: () => get(`https://api.todoist.com/rest/v1/labels`, { headers }),
 
-		get: async (id) => {
-			let project = await getOneJSON(id);
-			return project;
-		},
+		get: (id) =>
+			get(`https://api.todoist.com/rest/v1/labels/${id}`, { headers }),
 
-		delete: async (id) => {
-			return await axios.delete(
-				`https://api.todoist.com/rest/v1/labels/${id}`,
-				{ headers }
-			);
-		},
+		delete: (id) =>
+			del(`https://api.todoist.com/rest/v1/labels/${id}`, { headers }),
 
-		update: async (id, label) => {
-			return await axios.post(
-				`https://api.todoist.com/rest/v1/labels/${id}`,
-				label,
-				{ headers }
-			);
-		},
+		update: (id, label) =>
+			post(`https://api.todoist.com/rest/v1/labels/${id}`, label, { headers }),
 	};
 };
 export default labelClientModule;

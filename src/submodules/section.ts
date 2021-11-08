@@ -1,27 +1,10 @@
-import axios from "axios";
 import { AuthHeader, APISectionObject, SectionModule } from "../definitions";
+import { get, post, del } from "../services/apiRequests";
 
 const sectionClientModule = (headers: AuthHeader): SectionModule => {
-	const getOneJSON = async (id: number | string) => {
-		let { data } = await axios.get(
-			`https://api.todoist.com/rest/v1/sections/${id}`,
-			{ headers }
-		);
-		return data as APISectionObject;
-	};
-
-	const getAllJSON = async (project_id?: number) => {
-		let { data } = await axios.get(`https://api.todoist.com/rest/v1/sections`, {
-			headers,
-			params: { project_id },
-		});
-
-		return data as APISectionObject[];
-	};
-
 	return {
 		create: async (section) => {
-			let { data } = await axios.post(
+			let { data } = await post(
 				`https://api.todoist.com/rest/v1/sections`,
 				section,
 				{ headers }
@@ -29,27 +12,24 @@ const sectionClientModule = (headers: AuthHeader): SectionModule => {
 			return data as APISectionObject;
 		},
 
-		getAll: getAllJSON,
+		getAll: (project_id) =>
+			get<APISectionObject[]>(`https://api.todoist.com/rest/v1/sections`, {
+				headers,
+				params: { project_id },
+			}),
 
-		get: async (id) => {
-			let project = await getOneJSON(id);
-			return project;
-		},
+		get: async (id) =>
+			get<APISectionObject>(`https://api.todoist.com/rest/v1/sections/${id}`, {
+				headers,
+			}),
 
-		delete: async (id) => {
-			return await axios.delete(
-				`https://api.todoist.com/rest/v1/sections/${id}`,
-				{ headers }
-			);
-		},
+		delete: async (id) =>
+			del(`https://api.todoist.com/rest/v1/sections/${id}`, { headers }),
 
-		update: async (id, section) => {
-			return await axios.post(
-				`https://api.todoist.com/rest/v1/sections/${id}`,
-				section,
-				{ headers }
-			);
-		},
+		update: async (id, section) =>
+			post(`https://api.todoist.com/rest/v1/sections/${id}`, section, {
+				headers,
+			}),
 	};
 };
 export default sectionClientModule;

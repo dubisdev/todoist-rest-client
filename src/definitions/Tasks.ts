@@ -3,7 +3,7 @@ import { AxiosResponse } from "axios";
 export interface TaskModule {
 	create: (task: CreatableTask) => Promise<APITaskObject>;
 	close: (id: number | string) => Promise<AxiosResponse>;
-	getAll: (params?: TaskSearchableParams) => Promise<APITaskObject[]>;
+	getAll: () => Promise<APITaskObject[]>;
 	get: (id: string | number) => Promise<APITaskObject>;
 	update: (
 		id: number | string,
