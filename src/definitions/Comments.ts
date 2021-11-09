@@ -2,11 +2,9 @@ import { AxiosResponse } from "axios";
 
 export interface CommentModule {
 	get: (id: string | number) => Promise<APICommentObject>;
-
 	create: (comment: CreatableComment) => Promise<APICommentObject>;
 	delete: (id: number | string) => Promise<AxiosResponse>;
 	getAll: (params: CommentSearchableParams) => Promise<APICommentObject[]>;
-
 	update: (
 		id: number | string,
 		comment: CommentUpdatableParameters

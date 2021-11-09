@@ -9,17 +9,17 @@ const taskClientModule = (headers: AuthHeader): TaskModule => {
 			return data as APITaskObject;
 		},
 
-		update: async (id, task) => post(`${TASKS_URL}/${id}`, task, { headers }),
+		update: (id, task) => post(`${TASKS_URL}/${id}`, task, { headers }),
 
-		reopen: async (id) => post(`${TASKS_URL}/${id}/reopen`, {}, { headers }),
+		reopen: (id) => post(`${TASKS_URL}/${id}/reopen`, {}, { headers }),
 
-		delete: async (id) => del(`${TASKS_URL}/${id}`, { headers }),
+		delete: (id) => del(`${TASKS_URL}/${id}`, { headers }),
 
 		getAll: () => get(`${TASKS_URL}`, { headers }),
 
 		get: (id) => get(`${TASKS_URL}/${id}`, { headers }),
 
-		close: async (id) => post(`${TASKS_URL}/${id}/close`, {}, { headers }),
+		close: (id) => post(`${TASKS_URL}/${id}/close`, {}, { headers }),
 
 		search: (params) => get(`${TASKS_URL}`, { headers, params }),
 	};

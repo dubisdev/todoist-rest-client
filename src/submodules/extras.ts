@@ -36,8 +36,8 @@ const extrasClientModule = (headers: AuthHeader): ExtrasModule => {
 			return arrayTasks;
 		},
 
-		getTodayTaskJSON: async () =>
-			await get<APITaskObject[]>(`${TASKS_URL}`, {
+		getTodayTaskJSON: () =>
+			get<APITaskObject[]>(`${TASKS_URL}`, {
 				headers,
 				params: { lang: "en", filter: "today" },
 			}),

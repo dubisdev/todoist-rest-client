@@ -6,7 +6,7 @@ export interface ProjectModule {
 	get: (id: string | number) => Promise<APIProjectObject>;
 	update: (
 		id: number | string,
-		task: ProjectUpdatableParameters
+		project: ProjectUpdatableParameters
 	) => Promise<AxiosResponse>;
 	delete: (id: string | number) => Promise<AxiosResponse>;
 	getCollaborators: (id: string | number) => Promise<ProjectCollaborator[]>;

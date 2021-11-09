@@ -13,7 +13,7 @@ const commentClientModule = (headers: AuthHeader): CommentModule => {
 
 		get: (id) => get(`${COMMENTS_URL}/${id}`, { headers }),
 
-		delete: async (id) => del(`${COMMENTS_URL}/${id}`, { headers }),
+		delete: (id) => del(`${COMMENTS_URL}/${id}`, { headers }),
 
 		update: (id, comment) =>
 			post(`${COMMENTS_URL}/${id}`, comment, { headers }),

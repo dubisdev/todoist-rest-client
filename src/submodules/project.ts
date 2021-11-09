@@ -16,9 +16,9 @@ const projectClientModule = (headers: AuthHeader): ProjectModule => {
 		getCollaborators: (id) =>
 			get(`${PROJECTS_URL}/${id}/collaborators`, { headers }),
 
-		delete: async (id) => del(`${PROJECTS_URL}/${id}`, { headers }),
+		delete: (id) => del(`${PROJECTS_URL}/${id}`, { headers }),
 
-		update: async (id, project) =>
+		update: (id, project) =>
 			post(`${PROJECTS_URL}/${id}`, project, { headers }),
 	};
 };
