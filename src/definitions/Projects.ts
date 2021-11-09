@@ -17,7 +17,7 @@ export interface ProjectModule {
 export interface UserCreatedProject {
 	name?: string;
 	parent_id?: string;
-	color?: ProjectColor;
+	color?: TodoistAPIColors;
 	favorite?: boolean;
 }
 
@@ -30,7 +30,7 @@ export interface CreatableProject extends UserCreatedProject {
 export interface APIProjectObject {
 	id: number;
 	name: string;
-	color: ProjectColor;
+	color: TodoistAPIColors;
 	parent_id?: number;
 	order: number;
 	comment_count: number;
@@ -45,11 +45,11 @@ export interface APIProjectObject {
 // See https://developer.todoist.com/rest/v1/#update-a-project
 export interface ProjectUpdatableParameters {
 	name?: string;
-	color?: ProjectColor;
+	color?: TodoistAPIColors;
 	favorite?: boolean;
 }
 
-export type ProjectColor =
+export type TodoistAPIColors =
 	| 30
 	| 31
 	| 32

@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios";
-import { ProjectColor } from ".";
+import { TodoistAPIColors } from ".";
 
 export interface LabelModule {
 	create: (label: CreatableLabel) => Promise<APILabelObject>;
@@ -17,7 +17,7 @@ export interface LabelModule {
 export interface UserCreatedLabel {
 	name?: string;
 	order?: number;
-	color?: ProjectColor;
+	color?: TodoistAPIColors;
 	favorite?: boolean;
 }
 
@@ -30,7 +30,7 @@ export interface CreatableLabel extends UserCreatedLabel {
 export interface APILabelObject {
 	id: number;
 	name: string;
-	color: ProjectColor;
+	color: TodoistAPIColors;
 	order: number;
 	favorite: boolean;
 }
@@ -38,7 +38,7 @@ export interface APILabelObject {
 // See https://developer.todoist.com/rest/v1/#update-a-label
 export interface LabelUpdatableParameters {
 	name?: string;
-	color?: ProjectColor;
+	color?: TodoistAPIColors;
 	order?: number;
 	favorite?: boolean;
 }
