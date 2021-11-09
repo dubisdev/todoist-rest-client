@@ -1,57 +1,22 @@
-import axios from "axios";
-import {
-	AuthHeader,
-	APICommentObject,
-	CommentModule,
-	CommentSearchableParams,
-} from "../definitions";
+import { AuthHeader, APICommentObject, CommentModule } from "../definitions";
+import { get, del, post } from "../libs/apiRequests";
+import { COMMENTS_URL } from "../libs/constants";
 
 const commentClientModule = (headers: AuthHeader): CommentModule => {
-	const getOneJSON = async (id: number | string) => {
-		let { data } = await axios.get(
-			`https://api.todoist.com/rest/v1/comments/${id}`,
-			{ headers }
-		);
-		return data as APICommentObject;
-	};
-
-	const getAllJSON = async (params: CommentSearchableParams) => {
-		let { data } = await axios.get(`https://api.todoist.com/rest/v1/comments`, {
-			headers,
-			params,
-		});
-
-		return data as APICommentObject[];
-	};
-
 	return {
 		create: async (comment) => {
-			let { data } = await axios.post(
-				`https://api.todoist.com/rest/v1/comments`,
-				comment,
-				{ headers }
-			);
+			let { data } = await post(`${COMMENTS_URL}`, comment, { headers });
 			return data as APICommentObject;
 		},
 
-		getAllJSON,
+		getAll: (params) => get(`${COMMENTS_URL}`, { headers, params }),
 
-		get: getOneJSON,
+		get: (id) => get(`${COMMENTS_URL}/${id}`, { headers }),
 
-		delete: async (id) => {
-			return await axios.delete(
-				`https://api.todoist.com/rest/v1/comments/${id}`,
-				{ headers }
-			);
-		},
+		delete: (id) => del(`${COMMENTS_URL}/${id}`, { headers }),
 
-		update: async (id, comment) => {
-			return await axios.post(
-				`https://api.todoist.com/rest/v1/comments/${id}`,
-				comment,
-				{ headers }
-			);
-		},
+		update: (id, comment) =>
+			post(`${COMMENTS_URL}/${id}`, comment, { headers }),
 	};
 };
 export default commentClientModule;

@@ -52,7 +52,7 @@ describe("API Project Functions", () => {
 
 	// 4 active projects now
 	test("Get All Active Projects JSON", async () => {
-		const responseProjects = await myClient.project.getAllJSON();
+		const responseProjects = await myClient.project.getAll();
 
 		const projectExists = responseProjects.some(
 			(projectObj) => projectObj.name === "P2"
@@ -62,12 +62,9 @@ describe("API Project Functions", () => {
 		expect(projectExists).toBe(true);
 	});
 
-	test("Get All Active Project Names", async () => {
-		const responseProjects = await myClient.project.getAll();
-		const projectExists = responseProjects.some((name) => name === "P2");
-
-		expect(responseProjects.length).toBe(4);
-		expect(projectExists).toBe(true);
+	test("Test getAllProjectNames", async () => {
+		let names = await myClient.extras.getAllProjectNames();
+		expect(typeof names[0]).toEqual("string");
 	});
 
 	test("Update a project", async () => {
@@ -87,7 +84,7 @@ describe("API Project Functions", () => {
 	});
 
 	test("Delete All Previous Projects", async () => {
-		let allProjectsJSON = await myClient.project.getAllJSON();
+		let allProjectsJSON = await myClient.project.getAll();
 
 		let responses = await Promise.all(
 			allProjectsJSON.map(async (project) => {

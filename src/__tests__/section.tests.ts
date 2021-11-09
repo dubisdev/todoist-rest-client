@@ -7,9 +7,8 @@ const myClient = TDSClient(process.env.TODOIST_TOKEN);
 let inboxProjectID: number;
 beforeAll(async () => {
 	inboxProjectID =
-		(await myClient.project.getAllJSON()).find(
-			(project) => project.inbox_project
-		)?.id || 0;
+		(await myClient.project.getAll()).find((project) => project.inbox_project)
+			?.id || 0;
 });
 
 describe("Client-Side Section Creation", () => {
@@ -69,7 +68,7 @@ describe("API Section Functions", () => {
 	});
 
 	test("Get All Sections", async () => {
-		const responseSections = await myClient.section.getAllJSON(inboxProjectID);
+		const responseSections = await myClient.section.getAll(inboxProjectID);
 		const sectionExists = responseSections.some(
 			(sectionObj) => sectionObj.name === "Section 2"
 		);
@@ -79,7 +78,9 @@ describe("API Section Functions", () => {
 	});
 
 	test("Get All Section Names", async () => {
-		const responseSections = await myClient.section.getAll();
+		const responseSections = await myClient.extras.getAllSectionNames(
+			inboxProjectID
+		);
 		const sectionExists = responseSections.some((name) => name === "Section 2");
 
 		expect(responseSections.length).toBe(3);
@@ -89,12 +90,10 @@ describe("API Section Functions", () => {
 	test("Get Sections from Project (Inbox)", async () => {
 		const responseSections = await myClient.section.getAll(inboxProjectID);
 		const testSectionExists = responseSections.some(
-			(name) => name === "Test Section"
+			({ name }) => name === "Test Section"
 		);
 
 		expect(responseSections.length).toBe(3);
-		expect(typeof responseSections[0]).toBe("string");
-
 		expect(testSectionExists).toBe(true);
 	});
 
@@ -107,7 +106,7 @@ describe("API Section Functions", () => {
 	});
 
 	test("Delete All Previous Sections", async () => {
-		let allSectionsJSON = await myClient.section.getAllJSON();
+		let allSectionsJSON = await myClient.section.getAll();
 
 		let responses = await Promise.all(
 			allSectionsJSON.map(async (section) =>

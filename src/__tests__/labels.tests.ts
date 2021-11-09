@@ -44,7 +44,7 @@ describe("API Label Functions", () => {
 	});
 
 	test("Get All Labels", async () => {
-		const responseLabels = await myClient.label.getAllJSON();
+		const responseLabels = await myClient.label.getAll();
 		const testLabelExists = responseLabels.some(
 			(labelObj) => labelObj.name === "Test_Label"
 		);
@@ -54,7 +54,7 @@ describe("API Label Functions", () => {
 	});
 
 	test("Get All Label Names", async () => {
-		const responseLabels = await myClient.label.getAll();
+		const responseLabels = await myClient.extras.getAllLabelNames();
 		const testLabelExists = responseLabels.some(
 			(name) => name === "Test_Label"
 		);
@@ -72,7 +72,7 @@ describe("API Label Functions", () => {
 	});
 
 	test("Delete All Previous Labels", async () => {
-		let allLabelsJSON = await myClient.label.getAllJSON();
+		let allLabelsJSON = await myClient.label.getAll();
 
 		let responses = await Promise.all(
 			allLabelsJSON.map(async (label) => myClient.label.delete(label.id))

@@ -1,71 +1,25 @@
-import axios from "axios";
-import { AuthHeader, ProjectCollaborator } from "../definitions";
-import { APIProjectObject, ProjectModule } from "../definitions";
+import { AuthHeader, APIProjectObject, ProjectModule } from "../definitions";
+import { get, del, post } from "../libs/apiRequests";
+import { PROJECTS_URL } from "../libs/constants";
 
 const projectClientModule = (headers: AuthHeader): ProjectModule => {
-	async function getOneJSON(id: number | string, headers: AuthHeader) {
-		let { data } = await axios.get(
-			`https://api.todoist.com/rest/v1/projects/${id}`,
-			{ headers }
-		);
-		return data as APIProjectObject;
-	}
-
-	async function getAllJSON(headers: AuthHeader) {
-		let { data } = await axios.get(`https://api.todoist.com/rest/v1/projects`, {
-			headers,
-		});
-		return data as APIProjectObject[];
-	}
-
 	return {
 		create: async (project) => {
-			let { data } = await axios.post(
-				`https://api.todoist.com/rest/v1/projects`,
-				project,
-				{ headers }
-			);
+			let { data } = await post(`${PROJECTS_URL}`, project, { headers });
 			return data as APIProjectObject;
 		},
 
-		getAll: async () => {
-			let json = await getAllJSON(headers);
-			let arrayProjects: string[] = [];
-			json.forEach((project) => {
-				arrayProjects.push(project.name);
-			});
-			return arrayProjects;
-		},
+		getAll: () => get(`${PROJECTS_URL}`, { headers }),
 
-		getAllJSON: async () => await getAllJSON(headers),
+		get: (id) => get(`${PROJECTS_URL}/${id}`, { headers }),
 
-		get: async (id) => {
-			let project = await getOneJSON(id, headers);
-			return project;
-		},
+		getCollaborators: (id) =>
+			get(`${PROJECTS_URL}/${id}/collaborators`, { headers }),
 
-		getCollaborators: async (id) => {
-			const { data } = await axios.get(
-				`https://api.todoist.com/rest/v1/projects/${id}/collaborators`,
-				{ headers }
-			);
-			return data as ProjectCollaborator[];
-		},
+		delete: (id) => del(`${PROJECTS_URL}/${id}`, { headers }),
 
-		delete: async (id) => {
-			return await axios.delete(
-				`https://api.todoist.com/rest/v1/projects/${id}`,
-				{ headers }
-			);
-		},
-
-		update: async (id, project) => {
-			return await axios.post(
-				`https://api.todoist.com/rest/v1/projects/${id}`,
-				project,
-				{ headers }
-			);
-		},
+		update: (id, project) =>
+			post(`${PROJECTS_URL}/${id}`, project, { headers }),
 	};
 };
 export default projectClientModule;
