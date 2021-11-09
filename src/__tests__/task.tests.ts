@@ -1,6 +1,5 @@
 import TDSClient, { Task } from "..";
 import { APITaskObject, CreatableTask } from "../definitions";
-import moment from "moment";
 
 const myClient = TDSClient(process.env.TODOIST_TOKEN);
 
@@ -129,19 +128,9 @@ describe("API Tasks Functions", () => {
 			allTodayJSON.some((taskObj) => taskObj.content === "First task") &&
 			allTodayNames.some((name) => name === "First task");
 
-		let normalDate = new Date().toISOString().substring(0, 10);
-		let momentDate = moment.parseZone(new Date()).format().substring(0, 10);
-
-		if (normalDate === momentDate) {
-			// GMT day = local day
-			expect(allTodayJSON.length).toBe(2);
-			expect(typeof allTodayJSON[0]).toBe("object");
-			expect(firstTaskExists).toBe(true);
-		} else {
-			// GMT day != local day (offset influence in day)
-			expect(allTodayJSON.length).toBe(0);
-			expect(firstTaskExists).toBe(false);
-		}
+		expect(allTodayJSON.length).toBe(2);
+		expect(typeof allTodayJSON[0]).toBe("object");
+		expect(firstTaskExists).toBe(true);
 	});
 
 	test("Test getAllTaskNames", async () => {

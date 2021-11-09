@@ -5,7 +5,6 @@ import {
 	APIProjectObject,
 	APISectionObject,
 } from "../definitions";
-import moment from "moment";
 import { get } from "../libs/apiRequests";
 import {
 	LABELS_URL,
@@ -26,35 +25,22 @@ const extrasClientModule = (headers: AuthHeader): ExtrasModule => {
 		},
 
 		getTodayTaskNames: async () => {
-			let json = await get<APITaskObject[]>(`${TASKS_URL}`, { headers });
+			let json = await get<APITaskObject[]>(`${TASKS_URL}`, {
+				headers,
+				params: { lang: "en", filter: "today" },
+			});
 			let arrayTasks: string[] = [];
 
-			let todayTasksJson = json
-				.filter((task) => task.due !== undefined)
-				.filter(
-					(task) =>
-						task.due.date ===
-						moment.parseZone(new Date()).format().substring(0, 10)
-				);
-
-			todayTasksJson.forEach((task) => arrayTasks.push(task.content));
+			json.forEach((task) => arrayTasks.push(task.content));
 
 			return arrayTasks;
 		},
 
-		getTodayTaskJSON: async () => {
-			let json = await get<APITaskObject[]>(`${TASKS_URL}`, { headers });
-
-			let todayTasksJson = json
-				.filter((task) => task.due !== undefined)
-				.filter(
-					(task) =>
-						task.due.date ===
-						moment.parseZone(new Date()).format().substring(0, 10)
-				);
-
-			return todayTasksJson;
-		},
+		getTodayTaskJSON: async () =>
+			await get<APITaskObject[]>(`${TASKS_URL}`, {
+				headers,
+				params: { lang: "en", filter: "today" },
+			}),
 
 		getAllProjectNames: async () => {
 			let json = await get<APIProjectObject[]>(`${PROJECTS_URL}`, { headers });
