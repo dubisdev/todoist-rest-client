@@ -1,6 +1,6 @@
 {
   "name": "todoist-rest-client",
-  "version": "2.5.0",
+  "version": "3.0.0",
   "description": "A simple todoist-rest-api client",
   "author": "dubisdev",
   "license": "MIT",
