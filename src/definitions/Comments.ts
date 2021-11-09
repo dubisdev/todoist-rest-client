@@ -23,14 +23,14 @@ export type UserCreatedProjectComment = {
 	task_id?: undefined;
 	project_id: number;
 	content?: string;
-	attachment?: object;
+	attachment?: TodoistFile;
 };
 
 export type UserCreatedTaskComment = {
 	task_id: number;
 	project_id?: undefined;
 	content?: string;
-	attachment?: object;
+	attachment?: TodoistFile;
 };
 
 export type CreatableComment = UserCreatedComment & {
@@ -41,20 +41,13 @@ export type CreatableComment = UserCreatedComment & {
 
 export type APICommentObject = APIProjectCommentObject | APITaskCommentObject;
 
-const myComment: APICommentObject = {
-	id: 123456,
-	posted: "",
-	content: "",
-	project_id: 123456,
-};
-
 export type APIProjectCommentObject = {
 	id: number;
 	project_id: number;
 	task_id?: undefined;
 	posted: string;
 	content: string;
-	attachment?: object;
+	attachment?: TodoistFile;
 };
 export type APITaskCommentObject = {
 	id: number;
@@ -62,7 +55,7 @@ export type APITaskCommentObject = {
 	project_id?: undefined;
 	posted: string;
 	content: string;
-	attachment?: object;
+	attachment?: TodoistFile;
 };
 
 // See https://developer.todoist.com/rest/v1/#update-a-comment
@@ -73,3 +66,28 @@ export interface CommentUpdatableParameters {
 export type CommentSearchableParams =
 	| { project_id: number; task_id?: undefined }
 	| { task_id: number; project_id?: undefined };
+
+export interface BaseFileProperties {
+	file_name: string;
+	file_size: number;
+	file_type: string;
+	file_url: string;
+	upload_state?: "pending" | "completed";
+}
+
+export interface ImageFileProperties {
+	tn_l: [string, number, number];
+	tn_m: [string, number, number];
+	tn_s: [string, number, number];
+	file_duration?: undefined;
+}
+
+export interface AudioFileProperties {
+	file_duration: number;
+	tn_l?: undefined;
+	tn_m?: undefined;
+	tn_s?: undefined;
+}
+
+export type TodoistFile = BaseFileProperties &
+	(ImageFileProperties | AudioFileProperties);
