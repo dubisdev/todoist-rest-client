@@ -9,3 +9,4 @@
 tsconfig.json
 jest.config.mjs
 coverage/
+__tests__/
