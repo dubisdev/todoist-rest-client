@@ -11,6 +11,13 @@
   "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.js",
+  "files": [
+    "dist/TDSClient.js",
+    "dist/definitions",
+    "dist/libs",
+    "dist/resources",
+    "dist/submodules"
+  ],
   "exports": {
     ".": {
       "import": "./dist/index.js",
