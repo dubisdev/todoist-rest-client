@@ -1,6 +1,6 @@
 {
   "name": "todoist-rest-client",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "A simple todoist-rest-api client",
   "author": "dubisdev",
   "license": "MIT",
@@ -12,11 +12,8 @@
   "main": "dist/index.js",
   "module": "dist/index.js",
   "files": [
-    "dist/TDSClient.js",
-    "dist/definitions",
-    "dist/libs",
-    "dist/resources",
-    "dist/submodules"
+    "**/dist/*",
+    "**/dist/!(__tests__)/**"
   ],
   "exports": {
     ".": {
