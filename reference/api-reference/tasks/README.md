@@ -36,5 +36,5 @@ Create tasks locally
 
 ```javascript
 import { Task } from "todoist-rest-client";
-let myTask = new Task({ content: "Task name" });
+let myTask = Task({ content: "Task name" });
 ```

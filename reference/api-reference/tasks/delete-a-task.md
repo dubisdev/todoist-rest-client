@@ -1,5 +1,9 @@
 # Delete a task
 
+{% hint style="warning" %}
+Delete a task !== Complete a task
+{% endhint %}
+
 ### delete(id)
 
 ```javascript

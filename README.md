@@ -5,11 +5,11 @@ cover: >-
 coverY: -1067.7042801556422
 ---
 
-# JS Todoist-Rest-Client
+# 📋 JS Todoist-Rest-Client
 
 ## Welcome to JS Todoist Rest Client
 
-This client written in javascript allows you to access the functionalities of the [Todoist Web API](https://developer.todoist.com/rest/v1/) from the Javascript environment quickly and easily.
+This client written in typescript allows you to access the functionalities of the [Todoist Web API](https://developer.todoist.com/rest/v1/) from Javascript environments fast and easily.
 
 ## Want to jump right in?
 

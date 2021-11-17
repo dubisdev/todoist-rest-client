@@ -4,11 +4,13 @@
 
 We call "Todoist Resources" to all the Todoist elements that can be managed through their API:
 
-* [x] 🗒 [Projects](broken-reference)
+* [x] 🗒 [Projects](projects/)
 * [x] 🗒 [Tasks](tasks/)
-* [ ] 🗒 Sections
-* [ ] 🗒 Comments
-* [ ] 🗒 Labels
+* [x] 🗒 [Sections](sections/)
+* [x] 🗒 [Labels](labels/)
+* [x] 🗒 [Comments](comments/)
+
+This client also provides some extra utilities availables in the [extras module](extras/).
 
 ### Resource Schemas
 
@@ -36,9 +38,9 @@ The client creates a "_No\_Content_" task to avoid errors when creating the task
 {% hint style="warning" %}
 With this **methods** you are only creating JSON objects, they are not being created in the Todoist Servers!
 
-To do that you must use the `client._resource_type_.create()` methods.
+To do that you must use the `client.<<resource type>>.create()` methods.
 {% endhint %}
 
-{% content-ref url="broken-reference" %}
-[Broken link](broken-reference)
+{% content-ref url="broken-reference/" %}
+[broken-reference](broken-reference/)
 {% endcontent-ref %}
