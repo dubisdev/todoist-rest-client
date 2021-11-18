@@ -1,6 +1,6 @@
 # Create Sections
 
-### create(section) <a href="createtask" id="createtask"></a>
+### create(section) <a href="createsection" id="createsection"></a>
 
 ```javascript
 const myClient // an authorized client instance

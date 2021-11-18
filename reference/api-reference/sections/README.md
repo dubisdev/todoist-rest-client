@@ -2,7 +2,7 @@
 
 ### Section JSON Objects
 
-The [official API documentation](https://developer.todoist.com/rest/v1/#projects) shows us the outline of a complete section:
+The [official API documentation](https://developer.todoist.com/rest/v1/#sections) shows us the outline of a complete section:
 
 ```json
 {

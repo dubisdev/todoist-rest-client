@@ -1,6 +1,6 @@
 # Get All Sections
 
-### getAll(project\_id?) <a href="getid" id="getid"></a>
+### getAll(project\_id?) <a href="getAll" id="getAll"></a>
 
 ```javascript
 const myClient // an authorized client instance

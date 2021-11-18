@@ -4,7 +4,7 @@
 
 The [official API documentation](https://developer.todoist.com/rest/v1/#tasks) shows us the outline of a complete task:
 
-```javascript
+```json
 {
     "assignee": 2671142,
     "assigner": 2671362,

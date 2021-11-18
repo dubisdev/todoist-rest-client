@@ -27,5 +27,5 @@ Create projects locally
 
 ```javascript
 import { Project } from "todoist-rest-client";
-let myTask = Project({ name: "Project name" });
+let myProject = Project({ name: "Project name" });
 ```
