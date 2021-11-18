@@ -1,6 +1,6 @@
 # Get Project Collaborators
 
-### getCollaborators(id)
+### getCollaborators(id) <a href="getcollaborators" id="getcollaborators"></a>
 
 ```javascript
 const myClient // an authorized client instance

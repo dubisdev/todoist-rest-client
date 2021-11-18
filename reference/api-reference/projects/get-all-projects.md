@@ -1,6 +1,6 @@
 # Get All Projects
 
-### getAll() <a href="getid" id="getid"></a>
+### getAll() <a href="getall" id="getall"></a>
 
 ```javascript
 const myClient // an authorized client instance
