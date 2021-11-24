@@ -1,6 +1,10 @@
-import { AuthHeader, APICommentObject, CommentModule } from "../definitions";
-import { get, del, post } from "../libs/apiRequests";
-import { COMMENTS_URL } from "../libs/constants";
+import {
+	AuthHeader,
+	APICommentObject,
+	CommentModule,
+} from "../definitions/index.js";
+import { get, del, post } from "../libs/apiRequests.js";
+import { COMMENTS_URL } from "../libs/constants.js";
 
 const commentClientModule = (headers: AuthHeader): CommentModule => {
 	return {

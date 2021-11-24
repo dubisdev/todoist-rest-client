@@ -1,6 +1,10 @@
-import { AuthHeader, APISectionObject, SectionModule } from "../definitions";
-import { get, post, del } from "../libs/apiRequests";
-import { SECTIONS_URL } from "../libs/constants";
+import {
+	AuthHeader,
+	APISectionObject,
+	SectionModule,
+} from "../definitions/index.js";
+import { get, post, del } from "../libs/apiRequests.js";
+import { SECTIONS_URL } from "../libs/constants.js";
 
 const sectionClientModule = (headers: AuthHeader): SectionModule => {
 	return {

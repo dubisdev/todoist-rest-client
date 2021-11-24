@@ -1,6 +1,10 @@
-import { AuthHeader, APILabelObject, LabelModule } from "../definitions";
-import { get, del, post } from "../libs/apiRequests";
-import { LABELS_URL } from "../libs/constants";
+import {
+	AuthHeader,
+	APILabelObject,
+	LabelModule,
+} from "../definitions/index.js";
+import { get, del, post } from "../libs/apiRequests.js";
+import { LABELS_URL } from "../libs/constants.js";
 
 const labelClientModule = (headers: AuthHeader): LabelModule => {
 	return {

@@ -4,14 +4,14 @@ import {
 	AuthHeader,
 	APIProjectObject,
 	APISectionObject,
-} from "../definitions";
-import { get } from "../libs/apiRequests";
+} from "../definitions/index.js";
+import { get } from "../libs/apiRequests.js";
 import {
 	LABELS_URL,
 	PROJECTS_URL,
 	SECTIONS_URL,
 	TASKS_URL,
-} from "../libs/constants";
+} from "../libs/constants.js";
 
 const extrasClientModule = (headers: AuthHeader): ExtrasModule => {
 	return {
