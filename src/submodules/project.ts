@@ -1,6 +1,10 @@
-import { AuthHeader, APIProjectObject, ProjectModule } from "../definitions";
-import { get, del, post } from "../libs/apiRequests";
-import { PROJECTS_URL } from "../libs/constants";
+import {
+	AuthHeader,
+	APIProjectObject,
+	ProjectModule,
+} from "../definitions/index.js";
+import { get, del, post } from "../libs/apiRequests.js";
+import { PROJECTS_URL } from "../libs/constants.js";
 
 const projectClientModule = (headers: AuthHeader): ProjectModule => {
 	return {

@@ -1,6 +1,6 @@
-import { APITaskObject, AuthHeader, TaskModule } from "../definitions";
-import { get, post, del } from "../libs/apiRequests";
-import { TASKS_URL } from "../libs/constants";
+import { APITaskObject, AuthHeader, TaskModule } from "../definitions/index.js";
+import { get, post, del } from "../libs/apiRequests.js";
+import { TASKS_URL } from "../libs/constants.js";
 
 const taskClientModule = (headers: AuthHeader): TaskModule => {
 	return {

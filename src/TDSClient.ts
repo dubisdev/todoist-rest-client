@@ -1,5 +1,12 @@
-import { task, project, section, label, comment, extras } from "./submodules";
-import { ClientConstructor, TDSClient } from "./definitions";
+import {
+	task,
+	project,
+	section,
+	label,
+	comment,
+	extras,
+} from "./submodules/index.js";
+import { ClientConstructor, TDSClient } from "./definitions/index.js";
 
 const TDSClientConstructor: ClientConstructor = (apiToken): TDSClient => {
 	if (!apiToken) throw new Error("Missing api token");

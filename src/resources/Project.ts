@@ -1,4 +1,4 @@
-import { CreatableProject, UserCreatedProject } from "../definitions";
+import { CreatableProject, UserCreatedProject } from "../definitions/index.js";
 
 const Project = (project: UserCreatedProject = {}): CreatableProject => {
 	const { name = "_No_Project_Name_Provided_", ...restOfProperties } = project;
