@@ -10,10 +10,10 @@
 		"rest-client"
 	],
 	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
 	"files": [
 		"**/dist/**"
 	],
-	"types": "dist/index.d.ts",
 	"dependencies": {
 		"axios": "^0.24.0",
 		"uuid": "^8.3.2"

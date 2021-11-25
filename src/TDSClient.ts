@@ -6,7 +6,7 @@ import {
 	comment,
 	extras,
 } from "./submodules/index.js";
-import { ClientConstructor, TDSClient } from "./definitions/index.js";
+import { ClientConstructor, TDSClient } from "./definitions";
 
 const TDSClientConstructor: ClientConstructor = (apiToken): TDSClient => {
 	if (!apiToken) throw new Error("Missing api token");
