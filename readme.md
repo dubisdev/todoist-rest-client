@@ -40,6 +40,10 @@ const myClient = TDSClient(API_TOKEN); //get an api token from your todoist inte
 
 See [here](https://dubisdev.gitbook.io/js-todoist-rest-client/) the full client documentation and methods.
 
+## Contributions
+
+![Alt](https://repobeats.axiom.co/api/embed/5186a98262c30ae1874b7990570039f2241bcb45.svg "Repobeats analytics image")
+
 ## License
 
 MIT © [Dubisdev](https://dubis.dev)
