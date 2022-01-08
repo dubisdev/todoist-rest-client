@@ -1,6 +1,6 @@
 {
 	"name": "todoist-rest-client",
-	"version": "3.0.8",
+	"version": "3.0.9",
 	"type": "module",
 	"description": "A simple todoist-rest-api client",
 	"author": "dubisdev",

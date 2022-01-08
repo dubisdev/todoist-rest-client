@@ -1,4 +1,8 @@
-# JS TODOIST-REST-CLIENT [![codecov](https://codecov.io/gh/dubisdev/todoist-rest-client/branch/master/graph/badge.svg?token=SDKUMHUC6Y)](https://codecov.io/gh/dubisdev/todoist-rest-client)
+# 🚧⚠️ This package is no longer maintained 🚧⚠️
+
+Although the features and structure of the package are different from those of the new [public official project](https://github.com/Doist/todoist-api-typescript), this project will not continue to be updated with the new features that [@Doist](https://github.com/Doist) could add to its REST API.
+
+# JS TODOIST-REST-CLIENT [![unmaintained badge](http://unmaintained.tech/badge.svg)](#) [![codecov](https://codecov.io/gh/dubisdev/todoist-rest-client/branch/master/graph/badge.svg?token=SDKUMHUC6Y)](https://codecov.io/gh/dubisdev/todoist-rest-client) 
 
 > _A simple todoist-rest-api client_
 
