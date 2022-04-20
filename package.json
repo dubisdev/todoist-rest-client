@@ -15,12 +15,12 @@
     "**/dist/**"
   ],
   "dependencies": {
-    "axios": "0.26.1",
     "uuid": "8.3.2"
   },
   "devDependencies": {
     "@types/jest": "27.4.1",
     "@types/uuid": "8.3.4",
+    "@types/node": "17.0.25",
     "dotenv": "10.0.0",
     "jest": "27.5.1",
     "ts-jest": "27.1.4",
@@ -37,5 +37,8 @@
   "bugs": {
     "url": "https://github.com/dubisdev/todoist-rest-client/issues"
   },
-  "homepage": "https://github.com/dubisdev/todoist-rest-client#readme"
+  "homepage": "https://github.com/dubisdev/todoist-rest-client#readme",
+  "engines": {
+    "node": ">=18"
+  }
 }
