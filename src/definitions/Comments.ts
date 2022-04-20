@@ -60,8 +60,8 @@ export interface CommentUpdatableParameters {
 }
 
 export type CommentSearchableParams =
-  | { project_id: number; task_id?: undefined }
-  | { task_id: number; project_id?: undefined };
+  | { project_id: string; task_id?: "" }
+  | { task_id: string; project_id?: "" };
 
 export interface BaseFileProperties {
   file_name: string;

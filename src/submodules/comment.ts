@@ -7,7 +7,13 @@ const commentClientModule = (headers: AuthHeader): CommentModule => {
     create: (comment) =>
       post(`${COMMENTS_URL}`, comment, { headers }).then((res) => res.json()),
 
-    getAll: (params) => get(`${COMMENTS_URL}`, { headers, params }),
+    getAll: (params) => {
+      let url = new URL(`${COMMENTS_URL}`);
+
+      url.search = new URLSearchParams(params).toString();
+
+      return get(url.toString(), { headers, params });
+    },
 
     get: (id) => get(`${COMMENTS_URL}/${id}`, { headers }),
 
